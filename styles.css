@@ -10,9 +10,9 @@
   --muted-2: #8c8c8c;
   --line: #e2e2e2;
   --line-strong: #d3d3d3;
-  --gold: #f8d858;          /* brand accent */
-  --gold-deep: #d9a441;     /* legible gold for text/underlines */
-  --gold-soft: #fdf3d0;
+  --gold: #e0a52c;          /* brand accent — richer amber */
+  --gold-deep: #b47d18;     /* legible amber for text/underlines */
+  --gold-soft: #f6e9c8;
   --gray-block: #d7d7d7;
   --radius: 4px;
   --radius-lg: 10px;
