@@ -3,29 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Nexa is a digital agency crafting brands, products, and experiences that move businesses forward." />
-  <meta name="theme-color" content="#0b0d12" />
-  <title>Nexa — Digital Agency for Brands That Move Forward</title>
+  <meta name="description" content="NEXA is a design and engineering studio delivering practical, well-structured solutions — from concept to construction support. Based in Jeddah, K.S.A." />
+  <meta name="theme-color" content="#1f1f1f" />
+  <title>NEXA — Design &amp; Engineering Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236c5ce7'/%3E%3Cpath d='M28 72V28h9l26 30V28h9v44h-9L37 42v30z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="icon" href="assets/favicon.png" />
 </head>
 <body>
   <!-- Header -->
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a href="#home" class="logo" aria-label="Nexa home">
-        <span class="logo-mark">N</span>
-        <span class="logo-text">Nexa</span>
+      <a href="#home" class="logo" aria-label="NEXA home">
+        <img src="assets/nexa-logo-dark.png" alt="NEXA" class="logo-img" />
       </a>
       <nav class="nav" id="nav">
         <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#process">Process</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#why">Why NEXA</a>
         <a href="#about">About</a>
-        <a href="#contact" class="nav-cta">Start a project</a>
+        <a href="#contact" class="nav-cta">Request a proposal</a>
       </nav>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -36,39 +35,33 @@
   <main>
     <!-- Hero -->
     <section class="hero" id="home">
-      <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="eyebrow reveal">Digital Agency · Est. 2018</p>
-        <h1 class="hero-title reveal">
-          We build brands &amp;<br />
-          products that <span class="grad">move forward</span>.
-        </h1>
-        <p class="hero-sub reveal">
-          Nexa is a design and engineering studio partnering with ambitious teams to
-          craft strategy, identity, and software that people actually love to use.
-        </p>
-        <div class="hero-actions reveal">
-          <a href="#contact" class="btn btn-primary">Start a project</a>
-          <a href="#work" class="btn btn-ghost">See our work</a>
-        </div>
-        <div class="hero-stats reveal">
-          <div class="stat"><span class="stat-num" data-count="180">0</span><span class="stat-label">Projects shipped</span></div>
-          <div class="stat"><span class="stat-num" data-count="48">0</span><span class="stat-label">Global clients</span></div>
-          <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label">Design awards</span></div>
-          <div class="stat"><span class="stat-num" data-count="98" data-suffix="%">0</span><span class="stat-label">Client retention</span></div>
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Design &amp; Engineering Studio · Jeddah, K.S.A.</p>
+          <h1 class="hero-title reveal">
+            From concept to<br />
+            construction, <span class="gold">built right</span>.
+          </h1>
+          <p class="hero-sub reveal">
+            NEXA turns ideas into clear, buildable designs — combining architectural
+            expertise with practical project insight to deliver reliable solutions,
+            end to end.
+          </p>
+          <p class="hero-tagline reveal">“Journey of Success”</p>
+          <div class="hero-actions reveal">
+            <a href="#contact" class="btn btn-primary">Request a proposal</a>
+            <a href="#services" class="btn btn-ghost">Explore our services</a>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- Logos / trust -->
-    <section class="marquee-section" aria-label="Trusted by">
-      <div class="container"><p class="marquee-label">Trusted by teams at</p></div>
-      <div class="marquee">
-        <div class="marquee-track">
-          <span>Northwind</span><span>Lumen</span><span>Vertex</span><span>Aria</span>
-          <span>Orbit</span><span>Cobalt</span><span>Meridian</span><span>Fathom</span>
-          <span>Northwind</span><span>Lumen</span><span>Vertex</span><span>Aria</span>
-          <span>Orbit</span><span>Cobalt</span><span>Meridian</span><span>Fathom</span>
+      <div class="hero-stats-wrap">
+        <div class="container">
+          <div class="hero-stats reveal">
+            <div class="stat"><span class="stat-num" data-count="8">0</span><span class="stat-label">Sectors served</span></div>
+            <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label">Services offered</span></div>
+            <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">Core values</span></div>
+            <div class="stat"><span class="stat-num">A→Z</span><span class="stat-label">Concept to completion</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -78,160 +71,166 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">What we do</p>
-          <h2 class="section-title">Services built around outcomes</h2>
-          <p class="section-lead">From first sketch to production launch, we cover the full arc of bringing a digital product to life.</p>
+          <h2 class="section-title">End-to-end design &amp; engineering</h2>
+          <p class="section-lead">From first concept to construction support, we cover the full arc of bringing a project to life — with quality, efficiency, and attention to detail.</p>
         </div>
         <div class="cards">
           <article class="card reveal">
-            <div class="card-icon">✦</div>
-            <h3>Brand &amp; Identity</h3>
-            <p>Naming, visual systems, and messaging that make your brand impossible to ignore.</p>
-            <ul class="card-list"><li>Strategy &amp; positioning</li><li>Logo &amp; visual identity</li><li>Brand guidelines</li></ul>
+            <div class="card-num">01</div>
+            <h3>Design</h3>
+            <p>Concept development and detailed design that turn ideas into clear, buildable outcomes.</p>
+            <ul class="card-list">
+              <li>Concept, 2D &amp; 3D design</li>
+              <li>Architectural &amp; structural design</li>
+              <li>Exterior, interior &amp; landscape</li>
+            </ul>
           </article>
           <article class="card reveal">
-            <div class="card-icon">◈</div>
-            <h3>Product Design</h3>
-            <p>Research-driven UX and interfaces that feel effortless and convert.</p>
-            <ul class="card-list"><li>UX research</li><li>UI &amp; design systems</li><li>Prototyping</li></ul>
+            <div class="card-num">02</div>
+            <h3>Engineering</h3>
+            <p>Technical documentation and engineering that keep projects accurate, compliant, and ready to build.</p>
+            <ul class="card-list">
+              <li>Shop drawings</li>
+              <li>Construction documents</li>
+              <li>Design review &amp; validation</li>
+            </ul>
           </article>
           <article class="card reveal">
-            <div class="card-icon">⌬</div>
-            <h3>Web &amp; Development</h3>
-            <p>Fast, accessible, scalable builds — from marketing sites to full platforms.</p>
-            <ul class="card-list"><li>Web &amp; app development</li><li>Headless CMS</li><li>Performance &amp; SEO</li></ul>
-          </article>
-          <article class="card reveal">
-            <div class="card-icon">◎</div>
-            <h3>Growth &amp; Strategy</h3>
-            <p>Data-informed experiments that turn traffic into loyal customers.</p>
-            <ul class="card-list"><li>Analytics &amp; CRO</li><li>Content strategy</li><li>Launch campaigns</li></ul>
+            <div class="card-num">03</div>
+            <h3>Project &amp; Support Services</h3>
+            <p>Coordination and delivery support that carry a project through to successful completion.</p>
+            <ul class="card-list">
+              <li>Turnkey delivery &amp; coordination</li>
+              <li>Bill of Quantities (BoQ)</li>
+              <li>Scope of work &amp; value engineering</li>
+            </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Work -->
-    <section class="section section-alt" id="work">
+    <!-- Sectors -->
+    <section class="section section-alt" id="sectors">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Selected work</p>
-          <h2 class="section-title">Projects we're proud of</h2>
-          <p class="section-lead">A snapshot of the brands and products we've helped build over the years.</p>
+          <p class="eyebrow">Sectors</p>
+          <h2 class="section-title">Built for diverse project types</h2>
+          <p class="section-lead">NEXA brings architectural expertise and practical insight to clients across a broad range of sectors.</p>
         </div>
-        <div class="work-grid">
-          <article class="work-item reveal" style="--c1:#6c5ce7;--c2:#00cec9">
-            <div class="work-visual"><span>01</span></div>
-            <div class="work-body">
-              <span class="tag">Fintech</span>
-              <h3>Cobalt Pay</h3>
-              <p>A payments platform rebrand that lifted signups by 42%.</p>
-            </div>
-          </article>
-          <article class="work-item reveal" style="--c1:#fd79a8;--c2:#fdcb6e">
-            <div class="work-visual"><span>02</span></div>
-            <div class="work-body">
-              <span class="tag">SaaS</span>
-              <h3>Lumen Analytics</h3>
-              <p>End-to-end product design for a data intelligence suite.</p>
-            </div>
-          </article>
-          <article class="work-item reveal" style="--c1:#00b894;--c2:#0984e3">
-            <div class="work-visual"><span>03</span></div>
-            <div class="work-body">
-              <span class="tag">E-commerce</span>
-              <h3>Aria Studio</h3>
-              <p>A headless storefront that cut load times in half.</p>
-            </div>
-          </article>
-          <article class="work-item reveal" style="--c1:#e17055;--c2:#6c5ce7">
-            <div class="work-visual"><span>04</span></div>
-            <div class="work-body">
-              <span class="tag">Healthcare</span>
-              <h3>Meridian Care</h3>
-              <p>A patient portal redesign focused on clarity and trust.</p>
-            </div>
-          </article>
+        <div class="sectors-grid">
+          <div class="sector reveal"><span class="sector-num">01</span><h3>High-Rise Buildings</h3></div>
+          <div class="sector reveal"><span class="sector-num">02</span><h3>Clinics &amp; Healthcare Facilities</h3></div>
+          <div class="sector reveal"><span class="sector-num">03</span><h3>Residential Projects</h3></div>
+          <div class="sector reveal"><span class="sector-num">04</span><h3>Commercial Developments</h3></div>
+          <div class="sector reveal"><span class="sector-num">05</span><h3>Office &amp; Corporate Spaces</h3></div>
+          <div class="sector reveal"><span class="sector-num">06</span><h3>Mixed-Use Developments</h3></div>
+          <div class="sector reveal"><span class="sector-num">07</span><h3>Booth Design</h3></div>
+          <div class="sector reveal"><span class="sector-num">08</span><h3>Roads, Bridges &amp; Tunnels</h3></div>
         </div>
       </div>
     </section>
 
-    <!-- Process -->
-    <section class="section" id="process">
+    <!-- Why NEXA -->
+    <section class="section" id="why">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">How we work</p>
-          <h2 class="section-title">A process without the guesswork</h2>
-          <p class="section-lead">Clear stages, tight feedback loops, and no surprises. Here's how a partnership with Nexa unfolds.</p>
+          <p class="eyebrow">Why NEXA</p>
+          <h2 class="section-title">A partner you can build on</h2>
+          <p class="section-lead">We are a growing studio grounded in proven methodologies, clear communication, and a strong commitment to quality outcomes.</p>
         </div>
-        <div class="steps">
-          <div class="step reveal"><span class="step-num">01</span><h3>Discover</h3><p>We dig into your goals, users, and market to define what success looks like.</p></div>
-          <div class="step reveal"><span class="step-num">02</span><h3>Design</h3><p>We shape ideas into strategy, identity, and interfaces — validated early and often.</p></div>
-          <div class="step reveal"><span class="step-num">03</span><h3>Build</h3><p>We engineer robust, scalable solutions with quality baked in at every step.</p></div>
-          <div class="step reveal"><span class="step-num">04</span><h3>Launch &amp; Grow</h3><p>We ship, measure, and iterate — turning launch day into lasting momentum.</p></div>
+        <div class="why-grid">
+          <article class="why-item reveal">
+            <div class="why-icon">◇</div>
+            <h3>Detail-Oriented</h3>
+            <p>Careful design and clear technical work at every stage.</p>
+          </article>
+          <article class="why-item reveal">
+            <div class="why-icon">◈</div>
+            <h3>Flexible Pricing</h3>
+            <p>Practical solutions that work within your budget.</p>
+          </article>
+          <article class="why-item reveal">
+            <div class="why-icon">◆</div>
+            <h3>Professional</h3>
+            <p>Organized workflow and clear communication throughout.</p>
+          </article>
+          <article class="why-item reveal">
+            <div class="why-icon">❖</div>
+            <h3>Reliable</h3>
+            <p>Committed to quality and compliance, project after project.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- About / Testimonial -->
+    <!-- About / Purpose -->
     <section class="section section-alt" id="about">
       <div class="container about-grid">
         <div class="about-copy reveal">
-          <p class="eyebrow">Who we are</p>
-          <h2 class="section-title">A small team with a big obsession for craft</h2>
-          <p>We're a collective of designers, engineers, and strategists who believe great work comes from curiosity, honesty, and relentless attention to detail. Since 2018 we've partnered with startups and enterprises alike to turn bold ideas into products people rely on every day.</p>
-          <p>No bloated retainers. No hand-offs to junior teams. Just senior people who care deeply about your success.</p>
+          <p class="eyebrow">About us</p>
+          <h2 class="section-title">A studio built on quality and precision</h2>
+          <p>NEXA is a design and engineering studio providing practical and well-structured solutions. We work closely with our clients to turn ideas into clear, buildable designs — focusing on quality, efficiency, and attention to detail.</p>
+          <p>Our goal is to deliver reliable solutions that meet each project's needs, from concept to execution.</p>
           <div class="about-values">
-            <div class="value"><strong>Craft first</strong><span>Details are the difference.</span></div>
-            <div class="value"><strong>Radical clarity</strong><span>No jargon, no surprises.</span></div>
-            <div class="value"><strong>True partners</strong><span>Your goals are ours.</span></div>
+            <div class="value"><strong>Quality &amp; precision</strong><span>Details are the difference.</span></div>
+            <div class="value"><strong>Integrity &amp; transparency</strong><span>Clear, honest communication.</span></div>
+            <div class="value"><strong>Client-focused</strong><span>Solutions built around you.</span></div>
           </div>
         </div>
-        <figure class="testimonial reveal">
-          <blockquote>"Nexa didn't just redesign our product — they reshaped how our whole company thinks about our customers. Easily the best agency we've worked with."</blockquote>
-          <figcaption>
-            <span class="avatar">JD</span>
-            <span class="quote-meta"><strong>Jordan Diaz</strong><span>VP Product, Lumen</span></span>
-          </figcaption>
-        </figure>
+        <div class="about-panels reveal">
+          <div class="panel">
+            <h4>Our Vision</h4>
+            <p>To be a trusted partner delivering smart and efficient design and engineering solutions.</p>
+          </div>
+          <div class="panel">
+            <h4>Our Mission</h4>
+            <p>To provide reliable, high-quality design and engineering services that add real value to every project.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- CTA / Contact -->
+    <!-- Contact -->
     <section class="section contact" id="contact">
       <div class="container">
         <div class="contact-card reveal">
           <div class="contact-copy">
             <p class="eyebrow">Let's talk</p>
             <h2 class="section-title">Have a project in mind?</h2>
-            <p class="section-lead">Tell us a little about what you're building. We'll get back to you within one business day.</p>
+            <p class="section-lead">Tell us a little about what you're building. We'll get back to you as soon as possible.</p>
             <ul class="contact-info">
-              <li><span>Email</span><a href="mailto:hello@nexa.agency">hello@nexa.agency</a></li>
-              <li><span>Phone</span><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-              <li><span>Studio</span>Remote-first · San Francisco, CA</li>
+              <li><span>Email</span><a href="mailto:Info@ex-nexa.com">Info@ex-nexa.com</a></li>
+              <li><span>Phone</span><a href="tel:+966544046166">+966 54 404 6166</a></li>
+              <li><span>Location</span>Jeddah, Kingdom of Saudi Arabia</li>
             </ul>
           </div>
           <form class="contact-form" id="contactForm" novalidate>
             <div class="field">
               <label for="name">Name</label>
-              <input type="text" id="name" name="name" required placeholder="Jane Appleseed" />
+              <input type="text" id="name" name="name" required placeholder="Your name" />
             </div>
             <div class="field">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="jane@company.com" />
+              <input type="email" id="email" name="email" required placeholder="you@company.com" />
             </div>
             <div class="field">
-              <label for="budget">Budget</label>
-              <select id="budget" name="budget">
-                <option value="">Select a range</option>
-                <option>&lt; $10k</option>
-                <option>$10k – $25k</option>
-                <option>$25k – $50k</option>
-                <option>$50k+</option>
+              <label for="type">Project type</label>
+              <select id="type" name="type">
+                <option value="">Select a sector</option>
+                <option>High-Rise Buildings</option>
+                <option>Clinics &amp; Healthcare</option>
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Office &amp; Corporate</option>
+                <option>Mixed-Use</option>
+                <option>Booth Design</option>
+                <option>Roads, Bridges &amp; Tunnels</option>
+                <option>Other</option>
               </select>
             </div>
             <div class="field">
               <label for="message">Project details</label>
-              <textarea id="message" name="message" rows="4" required placeholder="Tell us about your goals, timeline, and scope."></textarea>
+              <textarea id="message" name="message" rows="4" required placeholder="Tell us about your goals, scope, and timeline."></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Send message</button>
             <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
@@ -245,27 +244,30 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="#home" class="logo"><span class="logo-mark">N</span><span class="logo-text">Nexa</span></a>
-        <p>Design &amp; engineering studio building brands and products that move forward.</p>
+        <img src="assets/nexa-logo-white.png" alt="NEXA" class="footer-logo" />
+        <p>A design &amp; engineering studio delivering practical, well-structured solutions — from concept to construction support.</p>
+        <p class="footer-tagline">“Journey of Success”</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h4>Company</h4>
-          <a href="#about">About</a><a href="#work">Work</a><a href="#process">Process</a>
+          <h4>Studio</h4>
+          <a href="#about">About</a><a href="#why">Why NEXA</a><a href="#sectors">Sectors</a>
         </div>
         <div class="footer-col">
           <h4>Services</h4>
-          <a href="#services">Branding</a><a href="#services">Product</a><a href="#services">Development</a>
+          <a href="#services">Design</a><a href="#services">Engineering</a><a href="#services">Project Support</a>
         </div>
         <div class="footer-col">
-          <h4>Connect</h4>
-          <a href="#contact">Contact</a><a href="#" aria-label="Twitter">Twitter</a><a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <h4>Contact</h4>
+          <a href="mailto:Info@ex-nexa.com">Info@ex-nexa.com</a>
+          <a href="tel:+966544046166">+966 54 404 6166</a>
+          <span class="footer-loc">Jeddah, K.S.A.</span>
         </div>
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>© <span id="year"></span> Nexa Agency. All rights reserved.</p>
-      <p>Made with care, everywhere.</p>
+      <p>© <span id="year"></span> NEXA. All rights reserved.</p>
+      <p>Design &amp; Engineering Studio</p>
     </div>
   </footer>
 
