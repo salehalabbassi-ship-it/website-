@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,7 @@
   <title>NEXA — Design &amp; Engineering Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="assets/favicon.png" />
 </head>
@@ -19,16 +19,19 @@
       <a href="#home" class="logo" aria-label="NEXA home">
         <img src="assets/nexa-logo-dark.png" alt="NEXA" class="logo-img" />
       </a>
-      <nav class="nav" id="nav">
-        <a href="#services">Services</a>
-        <a href="#sectors">Sectors</a>
-        <a href="#why">Why NEXA</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="nav-cta">Request a proposal</a>
-      </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="header-right">
+        <nav class="nav" id="nav">
+          <a href="#services" data-en="Services" data-ar="الخدمات">Services</a>
+          <a href="#sectors" data-en="Sectors" data-ar="القطاعات">Sectors</a>
+          <a href="#why" data-en="Why NEXA" data-ar="لماذا نكسا">Why NEXA</a>
+          <a href="#about" data-en="About" data-ar="من نحن">About</a>
+          <a href="#contact" class="nav-cta" data-en="Request a proposal" data-ar="اطلب عرض سعر">Request a proposal</a>
+        </nav>
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">العربية</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -37,30 +40,30 @@
     <section class="hero" id="home">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow reveal">Design &amp; Engineering Studio · Jeddah, K.S.A.</p>
-          <h1 class="hero-title reveal">
+          <p class="eyebrow reveal" data-en="Design &amp; Engineering Studio · Jeddah, K.S.A." data-ar="استوديو تصميم وهندسة · جدة، المملكة العربية السعودية">Design &amp; Engineering Studio · Jeddah, K.S.A.</p>
+          <h1 class="hero-title reveal" id="heroTitle">
             From concept to<br />
             construction, <span class="gold">built right</span>.
           </h1>
-          <p class="hero-sub reveal">
+          <p class="hero-sub reveal" data-en="NEXA turns ideas into clear, buildable designs — combining architectural expertise with practical project insight to deliver reliable solutions, end to end." data-ar="نحوّل الأفكار إلى تصاميم واضحة قابلة للتنفيذ، بدمج الخبرة المعمارية مع الرؤية العملية للمشاريع لتقديم حلول موثوقة من البداية إلى النهاية.">
             NEXA turns ideas into clear, buildable designs — combining architectural
             expertise with practical project insight to deliver reliable solutions,
             end to end.
           </p>
-          <p class="hero-tagline reveal">“Journey of Success”</p>
+          <p class="hero-tagline reveal" data-en="“Journey of Success”" data-ar="«رحلة نجاح»">“Journey of Success”</p>
           <div class="hero-actions reveal">
-            <a href="#contact" class="btn btn-primary">Request a proposal</a>
-            <a href="#services" class="btn btn-ghost">Explore our services</a>
+            <a href="#contact" class="btn btn-primary" data-en="Request a proposal" data-ar="اطلب عرض سعر">Request a proposal</a>
+            <a href="#services" class="btn btn-ghost" data-en="Explore our services" data-ar="اكتشف خدماتنا">Explore our services</a>
           </div>
         </div>
       </div>
       <div class="hero-stats-wrap">
         <div class="container">
           <div class="hero-stats reveal">
-            <div class="stat"><span class="stat-num" data-count="8">0</span><span class="stat-label">Sectors served</span></div>
-            <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label">Services offered</span></div>
-            <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">Core values</span></div>
-            <div class="stat"><span class="stat-num">A→Z</span><span class="stat-label">Concept to completion</span></div>
+            <div class="stat"><span class="stat-num" data-count="8">0</span><span class="stat-label" data-en="Sectors served" data-ar="قطاعات نخدمها">Sectors served</span></div>
+            <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label" data-en="Services offered" data-ar="خدمات نقدّمها">Services offered</span></div>
+            <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label" data-en="Core values" data-ar="قيم أساسية">Core values</span></div>
+            <div class="stat"><span class="stat-num">A→Z</span><span class="stat-label" data-en="Concept to completion" data-ar="من الفكرة إلى الإنجاز">Concept to completion</span></div>
           </div>
         </div>
       </div>
@@ -70,39 +73,39 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">What we do</p>
-          <h2 class="section-title">End-to-end design &amp; engineering</h2>
-          <p class="section-lead">From first concept to construction support, we cover the full arc of bringing a project to life — with quality, efficiency, and attention to detail.</p>
+          <p class="eyebrow" data-en="What we do" data-ar="ماذا نقدّم">What we do</p>
+          <h2 class="section-title" data-en="End-to-end design &amp; engineering" data-ar="تصميم وهندسة من البداية إلى النهاية">End-to-end design &amp; engineering</h2>
+          <p class="section-lead" data-en="From first concept to construction support, we cover the full arc of bringing a project to life — with quality, efficiency, and attention to detail." data-ar="من الفكرة الأولى إلى دعم التنفيذ، نغطّي كامل مراحل إنجاز المشروع — بجودة وكفاءة واهتمام بالتفاصيل.">From first concept to construction support, we cover the full arc of bringing a project to life — with quality, efficiency, and attention to detail.</p>
         </div>
         <div class="cards">
           <article class="card reveal">
             <div class="card-num">01</div>
-            <h3>Design</h3>
-            <p>Concept development and detailed design that turn ideas into clear, buildable outcomes.</p>
+            <h3 data-en="Design" data-ar="التصميم">Design</h3>
+            <p data-en="Concept development and detailed design that turn ideas into clear, buildable outcomes." data-ar="تطوير المفاهيم والتصميم التفصيلي الذي يحوّل الأفكار إلى مخرجات واضحة قابلة للتنفيذ.">Concept development and detailed design that turn ideas into clear, buildable outcomes.</p>
             <ul class="card-list">
-              <li>Concept, 2D &amp; 3D design</li>
-              <li>Architectural &amp; structural design</li>
-              <li>Exterior, interior &amp; landscape</li>
+              <li data-en="Concept, 2D &amp; 3D design" data-ar="التصميم المفاهيمي ثنائي وثلاثي الأبعاد">Concept, 2D &amp; 3D design</li>
+              <li data-en="Architectural &amp; structural design" data-ar="التصميم المعماري والإنشائي">Architectural &amp; structural design</li>
+              <li data-en="Exterior, interior &amp; landscape" data-ar="التصميم الخارجي والداخلي وتنسيق الحدائق">Exterior, interior &amp; landscape</li>
             </ul>
           </article>
           <article class="card reveal">
             <div class="card-num">02</div>
-            <h3>Engineering</h3>
-            <p>Technical documentation and engineering that keep projects accurate, compliant, and ready to build.</p>
+            <h3 data-en="Engineering" data-ar="الهندسة">Engineering</h3>
+            <p data-en="Technical documentation and engineering that keep projects accurate, compliant, and ready to build." data-ar="التوثيق الفني والهندسة التي تحافظ على دقة المشاريع ومطابقتها وجاهزيتها للتنفيذ.">Technical documentation and engineering that keep projects accurate, compliant, and ready to build.</p>
             <ul class="card-list">
-              <li>Shop drawings</li>
-              <li>Construction documents</li>
-              <li>Design review &amp; validation</li>
+              <li data-en="Shop drawings" data-ar="المخططات التنفيذية">Shop drawings</li>
+              <li data-en="Construction documents" data-ar="وثائق التنفيذ">Construction documents</li>
+              <li data-en="Design review &amp; validation" data-ar="مراجعة واعتماد التصاميم">Design review &amp; validation</li>
             </ul>
           </article>
           <article class="card reveal">
             <div class="card-num">03</div>
-            <h3>Project &amp; Support Services</h3>
-            <p>Coordination and delivery support that carry a project through to successful completion.</p>
+            <h3 data-en="Project &amp; Support Services" data-ar="المشاريع وخدمات الدعم">Project &amp; Support Services</h3>
+            <p data-en="Coordination and delivery support that carry a project through to successful completion." data-ar="التنسيق ودعم التسليم الذي يقود المشروع إلى الإنجاز الناجح.">Coordination and delivery support that carry a project through to successful completion.</p>
             <ul class="card-list">
-              <li>Turnkey delivery &amp; coordination</li>
-              <li>Bill of Quantities (BoQ)</li>
-              <li>Scope of work &amp; value engineering</li>
+              <li data-en="Turnkey delivery &amp; coordination" data-ar="التسليم المتكامل والتنسيق">Turnkey delivery &amp; coordination</li>
+              <li data-en="Bill of Quantities (BoQ)" data-ar="جداول الكميات">Bill of Quantities (BoQ)</li>
+              <li data-en="Scope of work &amp; value engineering" data-ar="نطاق العمل والهندسة القيمية">Scope of work &amp; value engineering</li>
             </ul>
           </article>
         </div>
@@ -113,19 +116,19 @@
     <section class="section section-alt" id="sectors">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Sectors</p>
-          <h2 class="section-title">Built for diverse project types</h2>
-          <p class="section-lead">NEXA brings architectural expertise and practical insight to clients across a broad range of sectors.</p>
+          <p class="eyebrow" data-en="Sectors" data-ar="القطاعات">Sectors</p>
+          <h2 class="section-title" data-en="Built for diverse project types" data-ar="نخدم مختلف أنواع المشاريع">Built for diverse project types</h2>
+          <p class="section-lead" data-en="NEXA brings architectural expertise and practical insight to clients across a broad range of sectors." data-ar="تقدّم نكسا خبرتها المعمارية ورؤيتها العملية لعملائها في مجموعة واسعة من القطاعات.">NEXA brings architectural expertise and practical insight to clients across a broad range of sectors.</p>
         </div>
         <div class="sectors-grid">
-          <div class="sector reveal"><span class="sector-num">01</span><h3>High-Rise Buildings</h3></div>
-          <div class="sector reveal"><span class="sector-num">02</span><h3>Clinics &amp; Healthcare Facilities</h3></div>
-          <div class="sector reveal"><span class="sector-num">03</span><h3>Residential Projects</h3></div>
-          <div class="sector reveal"><span class="sector-num">04</span><h3>Commercial Developments</h3></div>
-          <div class="sector reveal"><span class="sector-num">05</span><h3>Office &amp; Corporate Spaces</h3></div>
-          <div class="sector reveal"><span class="sector-num">06</span><h3>Mixed-Use Developments</h3></div>
-          <div class="sector reveal"><span class="sector-num">07</span><h3>Booth Design</h3></div>
-          <div class="sector reveal"><span class="sector-num">08</span><h3>Roads, Bridges &amp; Tunnels</h3></div>
+          <div class="sector reveal"><span class="sector-num">01</span><h3 data-en="High-Rise Buildings" data-ar="المباني الشاهقة">High-Rise Buildings</h3></div>
+          <div class="sector reveal"><span class="sector-num">02</span><h3 data-en="Clinics &amp; Healthcare Facilities" data-ar="العيادات والمرافق الصحية">Clinics &amp; Healthcare Facilities</h3></div>
+          <div class="sector reveal"><span class="sector-num">03</span><h3 data-en="Residential Projects" data-ar="المشاريع السكنية">Residential Projects</h3></div>
+          <div class="sector reveal"><span class="sector-num">04</span><h3 data-en="Commercial Developments" data-ar="التطويرات التجارية">Commercial Developments</h3></div>
+          <div class="sector reveal"><span class="sector-num">05</span><h3 data-en="Office &amp; Corporate Spaces" data-ar="المكاتب والمساحات المؤسسية">Office &amp; Corporate Spaces</h3></div>
+          <div class="sector reveal"><span class="sector-num">06</span><h3 data-en="Mixed-Use Developments" data-ar="التطويرات متعددة الاستخدامات">Mixed-Use Developments</h3></div>
+          <div class="sector reveal"><span class="sector-num">07</span><h3 data-en="Booth Design" data-ar="تصميم الأجنحة">Booth Design</h3></div>
+          <div class="sector reveal"><span class="sector-num">08</span><h3 data-en="Roads, Bridges &amp; Tunnels" data-ar="الطرق والجسور والأنفاق">Roads, Bridges &amp; Tunnels</h3></div>
         </div>
       </div>
     </section>
@@ -134,30 +137,30 @@
     <section class="section" id="why">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Why NEXA</p>
-          <h2 class="section-title">A partner you can build on</h2>
-          <p class="section-lead">We are a growing studio grounded in proven methodologies, clear communication, and a strong commitment to quality outcomes.</p>
+          <p class="eyebrow" data-en="Why NEXA" data-ar="لماذا نكسا">Why NEXA</p>
+          <h2 class="section-title" data-en="A partner you can build on" data-ar="شريك يمكنك الاعتماد عليه">A partner you can build on</h2>
+          <p class="section-lead" data-en="We are a growing studio grounded in proven methodologies, clear communication, and a strong commitment to quality outcomes." data-ar="نحن استوديو متنامٍ يرتكز على منهجيات مثبتة وتواصل واضح والتزام قوي بجودة المخرجات.">We are a growing studio grounded in proven methodologies, clear communication, and a strong commitment to quality outcomes.</p>
         </div>
         <div class="why-grid">
           <article class="why-item reveal">
             <div class="why-icon">◇</div>
-            <h3>Detail-Oriented</h3>
-            <p>Careful design and clear technical work at every stage.</p>
+            <h3 data-en="Detail-Oriented" data-ar="دقة في التفاصيل">Detail-Oriented</h3>
+            <p data-en="Careful design and clear technical work at every stage." data-ar="تصميم دقيق وعمل فني واضح في كل مرحلة.">Careful design and clear technical work at every stage.</p>
           </article>
           <article class="why-item reveal">
             <div class="why-icon">◈</div>
-            <h3>Flexible Pricing</h3>
-            <p>Practical solutions that work within your budget.</p>
+            <h3 data-en="Flexible Pricing" data-ar="أسعار مرنة">Flexible Pricing</h3>
+            <p data-en="Practical solutions that work within your budget." data-ar="حلول عملية تناسب ميزانيتك.">Practical solutions that work within your budget.</p>
           </article>
           <article class="why-item reveal">
             <div class="why-icon">◆</div>
-            <h3>Professional</h3>
-            <p>Organized workflow and clear communication throughout.</p>
+            <h3 data-en="Professional" data-ar="احترافية">Professional</h3>
+            <p data-en="Organized workflow and clear communication throughout." data-ar="سير عمل منظّم وتواصل واضح طوال المشروع.">Organized workflow and clear communication throughout.</p>
           </article>
           <article class="why-item reveal">
             <div class="why-icon">❖</div>
-            <h3>Reliable</h3>
-            <p>Committed to quality and compliance, project after project.</p>
+            <h3 data-en="Reliable" data-ar="موثوقية">Reliable</h3>
+            <p data-en="Committed to quality and compliance, project after project." data-ar="التزام بالجودة والمطابقة، مشروعاً بعد مشروع.">Committed to quality and compliance, project after project.</p>
           </article>
         </div>
       </div>
@@ -167,24 +170,24 @@
     <section class="section section-alt" id="about">
       <div class="container about-grid">
         <div class="about-copy reveal">
-          <p class="eyebrow">About us</p>
-          <h2 class="section-title">A studio built on quality and precision</h2>
-          <p>NEXA is a design and engineering studio providing practical and well-structured solutions. We work closely with our clients to turn ideas into clear, buildable designs — focusing on quality, efficiency, and attention to detail.</p>
-          <p>Our goal is to deliver reliable solutions that meet each project's needs, from concept to execution.</p>
+          <p class="eyebrow" data-en="About us" data-ar="من نحن">About us</p>
+          <h2 class="section-title" data-en="A studio built on quality and precision" data-ar="استوديو قائم على الجودة والدقة">A studio built on quality and precision</h2>
+          <p data-en="NEXA is a design and engineering studio providing practical and well-structured solutions. We work closely with our clients to turn ideas into clear, buildable designs — focusing on quality, efficiency, and attention to detail." data-ar="نكسا استوديو تصميم وهندسة يقدّم حلولاً عملية ومنظّمة. نعمل عن قرب مع عملائنا لتحويل الأفكار إلى تصاميم واضحة قابلة للتنفيذ — مع التركيز على الجودة والكفاءة والاهتمام بالتفاصيل.">NEXA is a design and engineering studio providing practical and well-structured solutions. We work closely with our clients to turn ideas into clear, buildable designs — focusing on quality, efficiency, and attention to detail.</p>
+          <p data-en="Our goal is to deliver reliable solutions that meet each project's needs, from concept to execution." data-ar="هدفنا تقديم حلول موثوقة تلبّي احتياجات كل مشروع، من الفكرة إلى التنفيذ.">Our goal is to deliver reliable solutions that meet each project's needs, from concept to execution.</p>
           <div class="about-values">
-            <div class="value"><strong>Quality &amp; precision</strong><span>Details are the difference.</span></div>
-            <div class="value"><strong>Integrity &amp; transparency</strong><span>Clear, honest communication.</span></div>
-            <div class="value"><strong>Client-focused</strong><span>Solutions built around you.</span></div>
+            <div class="value"><strong data-en="Quality &amp; precision" data-ar="الجودة والدقة">Quality &amp; precision</strong><span data-en="Details are the difference." data-ar="التفاصيل هي الفرق.">Details are the difference.</span></div>
+            <div class="value"><strong data-en="Integrity &amp; transparency" data-ar="النزاهة والشفافية">Integrity &amp; transparency</strong><span data-en="Clear, honest communication." data-ar="تواصل واضح وصادق.">Clear, honest communication.</span></div>
+            <div class="value"><strong data-en="Client-focused" data-ar="التركيز على العميل">Client-focused</strong><span data-en="Solutions built around you." data-ar="حلول مصمّمة حولك.">Solutions built around you.</span></div>
           </div>
         </div>
         <div class="about-panels reveal">
           <div class="panel">
-            <h4>Our Vision</h4>
-            <p>To be a trusted partner delivering smart and efficient design and engineering solutions.</p>
+            <h4 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h4>
+            <p data-en="To be a trusted partner delivering smart and efficient design and engineering solutions." data-ar="أن نكون شريكاً موثوقاً يقدّم حلول تصميم وهندسة ذكية وفعّالة.">To be a trusted partner delivering smart and efficient design and engineering solutions.</p>
           </div>
           <div class="panel">
-            <h4>Our Mission</h4>
-            <p>To provide reliable, high-quality design and engineering services that add real value to every project.</p>
+            <h4 data-en="Our Mission" data-ar="رسالتنا">Our Mission</h4>
+            <p data-en="To provide reliable, high-quality design and engineering services that add real value to every project." data-ar="تقديم خدمات تصميم وهندسة موثوقة وعالية الجودة تضيف قيمة حقيقية لكل مشروع.">To provide reliable, high-quality design and engineering services that add real value to every project.</p>
           </div>
         </div>
       </div>
@@ -195,44 +198,48 @@
       <div class="container">
         <div class="contact-card reveal">
           <div class="contact-copy">
-            <p class="eyebrow">Let's talk</p>
-            <h2 class="section-title">Have a project in mind?</h2>
-            <p class="section-lead">Tell us a little about what you're building. We'll get back to you as soon as possible.</p>
+            <p class="eyebrow" data-en="Let's talk" data-ar="لنتحدث">Let's talk</p>
+            <h2 class="section-title" data-en="Have a project in mind?" data-ar="لديك مشروع في ذهنك؟">Have a project in mind?</h2>
+            <p class="section-lead" data-en="Tell us a little about what you're building. We'll get back to you as soon as possible." data-ar="أخبرنا قليلاً عمّا تبنيه، وسنعاود التواصل معك في أقرب وقت.">Tell us a little about what you're building. We'll get back to you as soon as possible.</p>
             <ul class="contact-info">
-              <li><span>Email</span><a href="mailto:Info@ex-nexa.com">Info@ex-nexa.com</a></li>
-              <li><span>Phone</span><a href="tel:+966544046166">+966 54 404 6166</a></li>
-              <li><span>Location</span>Jeddah, Kingdom of Saudi Arabia</li>
+              <li><span data-en="Email" data-ar="البريد الإلكتروني">Email</span><a href="mailto:Info@ex-nexa.com">Info@ex-nexa.com</a></li>
+              <li><span data-en="Phone" data-ar="الهاتف">Phone</span><a href="tel:+966544046166" dir="ltr">+966 54 404 6166</a></li>
+              <li><span data-en="Location" data-ar="الموقع">Location</span><span data-en="Jeddah, Kingdom of Saudi Arabia" data-ar="جدة، المملكة العربية السعودية">Jeddah, Kingdom of Saudi Arabia</span></li>
             </ul>
           </div>
           <form class="contact-form" id="contactForm" novalidate>
+            <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="subject" value="New enquiry from the NEXA website" />
+            <input type="hidden" name="from_name" value="NEXA Website" />
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
             <div class="field">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required placeholder="Your name" />
+              <label for="name" data-en="Name" data-ar="الاسم">Name</label>
+              <input type="text" id="name" name="name" required data-en-ph="Your name" data-ar-ph="اسمك" placeholder="Your name" />
             </div>
             <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="you@company.com" />
+              <label for="email" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+              <input type="email" id="email" name="email" required data-en-ph="you@company.com" data-ar-ph="you@company.com" placeholder="you@company.com" dir="ltr" />
             </div>
             <div class="field">
-              <label for="type">Project type</label>
+              <label for="type" data-en="Project type" data-ar="نوع المشروع">Project type</label>
               <select id="type" name="type">
-                <option value="">Select a sector</option>
-                <option>High-Rise Buildings</option>
-                <option>Clinics &amp; Healthcare</option>
-                <option>Residential</option>
-                <option>Commercial</option>
-                <option>Office &amp; Corporate</option>
-                <option>Mixed-Use</option>
-                <option>Booth Design</option>
-                <option>Roads, Bridges &amp; Tunnels</option>
-                <option>Other</option>
+                <option value="" data-en="Select a sector" data-ar="اختر قطاعاً">Select a sector</option>
+                <option data-en="High-Rise Buildings" data-ar="المباني الشاهقة">High-Rise Buildings</option>
+                <option data-en="Clinics &amp; Healthcare" data-ar="العيادات والمرافق الصحية">Clinics &amp; Healthcare</option>
+                <option data-en="Residential" data-ar="سكني">Residential</option>
+                <option data-en="Commercial" data-ar="تجاري">Commercial</option>
+                <option data-en="Office &amp; Corporate" data-ar="مكاتب ومؤسسات">Office &amp; Corporate</option>
+                <option data-en="Mixed-Use" data-ar="متعدد الاستخدامات">Mixed-Use</option>
+                <option data-en="Booth Design" data-ar="تصميم الأجنحة">Booth Design</option>
+                <option data-en="Roads, Bridges &amp; Tunnels" data-ar="الطرق والجسور والأنفاق">Roads, Bridges &amp; Tunnels</option>
+                <option data-en="Other" data-ar="أخرى">Other</option>
               </select>
             </div>
             <div class="field">
-              <label for="message">Project details</label>
-              <textarea id="message" name="message" rows="4" required placeholder="Tell us about your goals, scope, and timeline."></textarea>
+              <label for="message" data-en="Project details" data-ar="تفاصيل المشروع">Project details</label>
+              <textarea id="message" name="message" rows="4" required data-en-ph="Tell us about your goals, scope, and timeline." data-ar-ph="أخبرنا عن أهدافك ونطاق العمل والجدول الزمني." placeholder="Tell us about your goals, scope, and timeline."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Send message</button>
+            <button type="submit" class="btn btn-primary btn-block" data-en="Send message" data-ar="إرسال الرسالة">Send message</button>
             <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
           </form>
         </div>
@@ -245,29 +252,33 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="assets/nexa-logo-white.png" alt="NEXA" class="footer-logo" />
-        <p>A design &amp; engineering studio delivering practical, well-structured solutions — from concept to construction support.</p>
-        <p class="footer-tagline">“Journey of Success”</p>
+        <p data-en="A design &amp; engineering studio delivering practical, well-structured solutions — from concept to construction support." data-ar="استوديو تصميم وهندسة يقدّم حلولاً عملية ومنظّمة — من الفكرة إلى دعم التنفيذ.">A design &amp; engineering studio delivering practical, well-structured solutions — from concept to construction support.</p>
+        <p class="footer-tagline" data-en="“Journey of Success”" data-ar="«رحلة نجاح»">“Journey of Success”</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h4>Studio</h4>
-          <a href="#about">About</a><a href="#why">Why NEXA</a><a href="#sectors">Sectors</a>
+          <h4 data-en="Studio" data-ar="الاستوديو">Studio</h4>
+          <a href="#about" data-en="About" data-ar="من نحن">About</a>
+          <a href="#why" data-en="Why NEXA" data-ar="لماذا نكسا">Why NEXA</a>
+          <a href="#sectors" data-en="Sectors" data-ar="القطاعات">Sectors</a>
         </div>
         <div class="footer-col">
-          <h4>Services</h4>
-          <a href="#services">Design</a><a href="#services">Engineering</a><a href="#services">Project Support</a>
+          <h4 data-en="Services" data-ar="الخدمات">Services</h4>
+          <a href="#services" data-en="Design" data-ar="التصميم">Design</a>
+          <a href="#services" data-en="Engineering" data-ar="الهندسة">Engineering</a>
+          <a href="#services" data-en="Project Support" data-ar="دعم المشاريع">Project Support</a>
         </div>
         <div class="footer-col">
-          <h4>Contact</h4>
+          <h4 data-en="Contact" data-ar="تواصل">Contact</h4>
           <a href="mailto:Info@ex-nexa.com">Info@ex-nexa.com</a>
-          <a href="tel:+966544046166">+966 54 404 6166</a>
-          <span class="footer-loc">Jeddah, K.S.A.</span>
+          <a href="tel:+966544046166" dir="ltr">+966 54 404 6166</a>
+          <span class="footer-loc" data-en="Jeddah, K.S.A." data-ar="جدة، السعودية">Jeddah, K.S.A.</span>
         </div>
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>© <span id="year"></span> NEXA. All rights reserved.</p>
-      <p>Design &amp; Engineering Studio</p>
+      <p><span>© <span id="year"></span> </span><span data-en="NEXA. All rights reserved." data-ar="نكسا. جميع الحقوق محفوظة.">NEXA. All rights reserved.</span></p>
+      <p data-en="Design &amp; Engineering Studio" data-ar="استوديو تصميم وهندسة">Design &amp; Engineering Studio</p>
     </div>
   </footer>
 
