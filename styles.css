@@ -1,26 +1,29 @@
-/* ===== NEXA — Design & Engineering Studio ===== */
+/* ===== NEXA Engineering — Brand Sheet V1.0 ===== */
+/* Charcoal #1B1B1B · Champagne #B79A5F · Warm White #F7F4EE */
+/* Archivo (corporate · headings & body) · IBM Plex Mono (technical · data) */
 :root {
-  --bg: #f4f4f4;
+  --bg: #f7f4ee;            /* warm white — page */
   --bg-white: #ffffff;
   --surface: #ffffff;
-  --ink: #1f1f1f;
-  --ink-2: #2b2b2b;
-  --charcoal: #272727;
-  --muted: #6a6a6a;
-  --muted-2: #8c8c8c;
-  --line: #e2e2e2;
-  --line-strong: #d3d3d3;
-  --gold: #e0a52c;          /* brand accent — richer amber */
-  --gold-deep: #b47d18;     /* legible amber for text/underlines */
-  --gold-soft: #f6e9c8;
-  --gray-block: #d7d7d7;
+  --ink: #1b1b1b;           /* charcoal */
+  --ink-2: #2a2a2a;
+  --charcoal: #1b1b1b;
+  --muted: #6b665d;
+  --muted-2: #928c81;
+  --line: #e7e2d7;
+  --line-strong: #d8d2c5;
+  --gold: #b79a5f;          /* champagne — thin lines & pivot accents only */
+  --gold-deep: #8a6e3b;     /* legible champagne for text/underlines */
+  --gold-soft: #efe8d7;
+  --gray-block: #dad5cb;
   --radius: 4px;
   --radius-lg: 10px;
   --maxw: 1180px;
-  --shadow: 0 24px 60px -28px rgba(31, 31, 31, 0.28);
-  --shadow-sm: 0 10px 30px -18px rgba(31, 31, 31, 0.35);
-  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --display: "Barlow Condensed", "Arial Narrow", var(--font);
+  --shadow: 0 24px 60px -28px rgba(27, 27, 27, 0.26);
+  --shadow-sm: 0 10px 30px -18px rgba(27, 27, 27, 0.32);
+  --font: "Archivo", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --display: "Archivo", "Arial Narrow", var(--font);
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,9 +69,20 @@ img { max-width: 100%; display: block; }
   border-bottom-color: var(--line); padding: 12px 0;
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; }
-.logo { display: inline-flex; align-items: center; }
-.logo-img { height: 30px; width: auto; }
-.site-header.scrolled .logo-img { height: 26px; }
+
+/* ===== Logo lockup (compass-"A" mark + wordmark) ===== */
+.logo { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); }
+.logo-mark { height: 36px; width: auto; color: var(--ink); transition: height .3s ease; }
+.site-header.scrolled .logo-mark { height: 31px; }
+.logo-type { display: flex; flex-direction: column; line-height: 1; }
+.logo-word {
+  font-family: "Archivo", system-ui, sans-serif; font-weight: 800; font-size: 1.34rem;
+  letter-spacing: .16em; color: var(--ink); padding-left: .03em;
+}
+.logo-tag {
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; font-size: 0.56rem;
+  letter-spacing: .46em; color: var(--muted); margin-top: 5px; padding-left: .06em;
+}
 
 .header-right { display: flex; align-items: center; gap: 16px; }
 .lang-toggle {
@@ -111,8 +125,8 @@ img { max-width: 100%; display: block; }
 .hero-inner { position: relative; z-index: 2; }
 .hero-copy { max-width: 720px; padding-bottom: 70px; }
 .eyebrow {
-  display: inline-block; font-family: var(--display); font-weight: 600; letter-spacing: .14em;
-  text-transform: uppercase; font-size: 0.86rem; color: var(--ink);
+  display: inline-block; font-family: var(--mono); font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; font-size: 0.76rem; color: var(--gold-deep);
   padding-bottom: 8px; border-bottom: 2px solid var(--gold);
 }
 .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.0; margin: 28px 0 22px; letter-spacing: 0.01em; text-transform: uppercase; }
@@ -125,8 +139,8 @@ img { max-width: 100%; display: block; }
 .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); }
 .stat { padding: 34px 20px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
 .stat:last-child { border-right: 0; }
-.stat-num { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--gold); line-height: 1; }
-.stat-label { font-size: 0.82rem; color: #b9b9b9; letter-spacing: .04em; margin-top: 8px; display: block; }
+.stat-num { display: block; font-family: var(--mono); font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--gold); line-height: 1; }
+.stat-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; color: #b4ac9d; letter-spacing: .14em; margin-top: 10px; display: block; }
 
 /* ===== Sections ===== */
 .section { padding: 100px 0; }
@@ -146,7 +160,7 @@ img { max-width: 100%; display: block; }
 .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
 .card:hover { transform: translateY(-6px); border-color: var(--line-strong); box-shadow: var(--shadow-sm); }
 .card:hover::before { transform: scaleX(1); }
-.card-num { font-family: var(--display); font-weight: 700; font-size: 2.4rem; color: var(--gold-deep); line-height: 1; margin-bottom: 16px; }
+.card-num { font-family: var(--mono); font-weight: 500; font-size: 1.5rem; color: var(--gold-deep); line-height: 1; margin-bottom: 16px; letter-spacing: .02em; }
 .card h3 { font-family: var(--display); font-size: 1.5rem; text-transform: uppercase; letter-spacing: .01em; margin-bottom: 12px; }
 .card p { color: var(--muted); font-size: 0.96rem; margin-bottom: 18px; }
 .card-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -163,7 +177,7 @@ img { max-width: 100%; display: block; }
 .sector:hover { background: var(--ink); }
 .sector:hover .sector-num { color: var(--gold); }
 .sector:hover h3 { color: #fff; }
-.sector-num { font-family: var(--display); font-weight: 700; font-size: 1.4rem; color: var(--muted-2); transition: color .3s ease; }
+.sector-num { font-family: var(--mono); font-weight: 500; font-size: 1.1rem; color: var(--muted-2); transition: color .3s ease; letter-spacing: .02em; }
 .sector h3 { font-family: var(--display); font-size: 1.35rem; text-transform: uppercase; line-height: 1.1; transition: color .3s ease; margin-top: 20px; }
 
 /* ===== Why NEXA ===== */
@@ -207,7 +221,7 @@ img { max-width: 100%; display: block; }
   background: var(--bg); border: 1px solid var(--line-strong); border-radius: var(--radius);
   padding: 12px 14px; color: var(--ink); font-family: inherit; font-size: 0.95rem; transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ink); background: #fff; box-shadow: 0 0 0 3px rgba(248,216,88,0.35); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ink); background: #fff; box-shadow: 0 0 0 3px rgba(183,154,95,0.30); }
 .field textarea { resize: vertical; }
 .field.invalid input, .field.invalid textarea { border-color: #d94a4a; }
 .form-note { font-size: 0.9rem; min-height: 1.2em; }
@@ -217,7 +231,10 @@ img { max-width: 100%; display: block; }
 /* ===== Footer ===== */
 .site-footer { background: var(--ink); color: #cfcfcf; padding: 64px 0 30px; }
 .footer-inner { display: grid; grid-template-columns: 1.5fr 2fr; gap: 48px; padding-bottom: 44px; }
-.footer-logo { height: 30px; width: auto; margin-bottom: 18px; }
+.footer-logo { margin-bottom: 18px; color: #fff; }
+.footer-logo .logo-mark { height: 34px; color: #fff; }
+.footer-logo .logo-word { color: #fff; }
+.footer-logo .logo-tag { color: #b4ac9d; }
 .footer-brand p { color: #a9a9a9; font-size: 0.92rem; max-width: 340px; }
 .footer-tagline { font-family: var(--display); font-style: italic; color: var(--gold) !important; font-size: 1.05rem; margin-top: 14px; }
 .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
