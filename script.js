@@ -10,8 +10,8 @@
     }
   };
   var TITLE = {
-    en: "NEXA — Design & Engineering Studio",
-    ar: "نكسا — استوديو تصميم وهندسة"
+    en: "NEXA Engineering — Architecture · Engineering · Interior Design",
+    ar: "نكسا للهندسة — عمارة · هندسة · تصميم داخلي"
   };
   var root = document.documentElement;
   var langToggle = document.getElementById("langToggle");
@@ -115,6 +115,8 @@
   var form = document.getElementById("contactForm");
   var note = document.getElementById("formNote");
   var EMAIL = "Info@ex-nexa.com";
+  // Google Apps Script web app — saves each message to the NEXA spreadsheet and emails a copy.
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbwdSPe9MSTrzuODk00t07G2SJenZk7iPUJmDZq-YldvjY1-gtPXZG9G_ttQuClgPw6e/exec";
 
   var MSG = {
     invalid: { en: "Please fill in the required fields correctly.", ar: "يرجى تعبئة الحقول المطلوبة بشكل صحيح." },
@@ -173,37 +175,26 @@
       };
       var first = data.name.split(" ")[0];
       var nameSuffix = first ? ", " + first : "";
-      var key = form.access_key ? form.access_key.value : "";
-      var configured = key && key !== "WEB3FORMS_ACCESS_KEY";
+      var configured = ENDPOINT && ENDPOINT.indexOf("script.google.com") !== -1;
 
       if (!configured) {
-        // No email backend connected yet — offer one-tap email to the studio.
+        // No backend connected yet — offer one-tap email to the studio.
         showMailto(t("tap"), data, "success");
         return;
       }
 
       note.className = "form-note";
       note.textContent = t("sending");
-      var payload = {
-        access_key: key,
-        subject: form.subject ? form.subject.value : "New enquiry from the NEXA website",
-        from_name: form.from_name ? form.from_name.value : "NEXA Website",
-        name: data.name, email: data.email, project_type: data.type, message: data.message
-      };
-      fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload)
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (res && res.success) {
-            note.className = "form-note success";
-            note.textContent = t("sent").replace("{n}", nameSuffix);
-            form.reset();
-          } else {
-            showMailto(t("failed"), data, "error");
-          }
+      var body = new URLSearchParams({
+        name: data.name, email: data.email, type: data.type, message: data.message
+      });
+      // Posts to the Google Apps Script, which appends a spreadsheet row and emails a copy.
+      // no-cors: the submission reaches the script; we treat a completed request as sent.
+      fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: body })
+        .then(function () {
+          note.className = "form-note success";
+          note.textContent = t("sent").replace("{n}", nameSuffix);
+          form.reset();
         })
         .catch(function () { showMailto(t("failed"), data, "error"); });
     });
