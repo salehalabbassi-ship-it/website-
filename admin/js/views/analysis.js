@@ -18,7 +18,9 @@
       "an.kWonValue": "Total won value",
       "an.kWonValueSub": "{n} deals",
       "an.kProps": "Proposals sent",
-      "an.kPropsSub": "{p}% accepted · {o} awaiting reply",
+      "an.kPropsSub": "{a} accepted · {o} awaiting reply",
+      "an.kAccept": "Acceptance rate",
+      "an.kAcceptSub": "Accepted out of sent proposals",
       "an.kDays": "Average days to win",
       "an.kDaysSub": "From lead created to won",
       "an.kCollected": "Collected on projects",
@@ -82,7 +84,9 @@
       "an.kWonValue": "إجمالي قيمة الصفقات",
       "an.kWonValueSub": "{n} صفقات",
       "an.kProps": "العروض المرسلة",
-      "an.kPropsSub": "{p}% مقبولة · {o} بانتظار الرد",
+      "an.kPropsSub": "{a} مقبولة · {o} بانتظار الرد",
+      "an.kAccept": "نسبة قبول العروض",
+      "an.kAcceptSub": "المقبولة من العروض المرسلة",
       "an.kDays": "متوسط أيام الإغلاق",
       "an.kDaysSub": "من إضافة العميل حتى الفوز",
       "an.kCollected": "المحصّل من المشاريع",
@@ -319,7 +323,8 @@
       NX.ui.kpi({ label: T("an.kWinRate"), value: d.winRate == null ? "—" : d.winRate + "%", sub: esc(T("an.kWinRateSub", { w: d.won.length, l: d.lost.length })), icon: "star" }),
       NX.ui.kpi({ label: T("an.kWonValue"), value: esc(moneyShort(d.wonValue)), sub: esc(T("an.kWonValueSub", { n: d.won.length })), icon: "money", tone: "dark" }),
       NX.ui.kpi({ label: T("an.kAvgDeal"), value: d.won.length ? esc(moneyShort(d.avgDeal)) : "—", sub: esc(T("an.kAvgDealSub", { n: d.won.length })), icon: "money" }),
-      NX.ui.kpi({ label: T("an.kProps"), value: String(d.props.length), sub: esc(T("an.kPropsSub", { p: d.acceptRate, o: d.pending })), icon: "proposals" }),
+      NX.ui.kpi({ label: T("an.kProps"), value: String(d.props.length), sub: esc(T("an.kPropsSub", { a: d.accepted, o: d.pending })), icon: "proposals" }),
+      NX.ui.kpi({ label: T("an.kAccept"), value: d.props.length ? d.acceptRate + "%" : "—", sub: esc(T("an.kAcceptSub")), icon: "check" }),
       NX.ui.kpi({ label: T("an.kDays"), value: d.avgDays == null ? "—" : esc(T("an.days", { n: d.avgDays })), sub: esc(T("an.kDaysSub")), icon: "calendar" }),
       NX.ui.kpi({ label: T("an.kCollected"), value: esc(moneyShort(d.collected)), icon: "projects",
         sub: '<span class="an-meter" role="img" aria-label="' + pct(d.collected, d.projValue) + '%"><span style="width:' + pct(d.collected, d.projValue) + '%"></span></span>' + esc(T("an.kCollectedSub", { v: moneyShort(d.outstanding) })) })
@@ -426,7 +431,8 @@
     add(S, T("an.kWinRate"), d.winRate == null ? "" : d.winRate + "%", T("an.kWinRateSub", { w: d.won.length, l: d.lost.length }));
     add(S, T("an.kWonValue"), Math.round(d.wonValue), T("c.sar"));
     add(S, T("an.kAvgDeal"), Math.round(d.avgDeal), T("c.sar"));
-    add(S, T("an.kProps"), d.props.length, T("an.kPropsSub", { p: d.acceptRate, o: d.pending }));
+    add(S, T("an.kProps"), d.props.length, T("an.kPropsSub", { a: d.accepted, o: d.pending }));
+    add(S, T("an.kAccept"), d.props.length ? d.acceptRate + "%" : "");
     add(S, T("an.kDays"), d.avgDays == null ? "" : d.avgDays);
     add(S, T("an.kCollected"), Math.round(d.collected), T("c.sar"));
     add(S, T("an.kCollectedOut"), Math.round(d.outstanding), T("c.sar"));

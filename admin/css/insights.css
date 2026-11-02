@@ -8,9 +8,14 @@
 
 /* ================= Dashboard ================= */
 .db-kpis { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 18px; }
-.db-kpis-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-@media (max-width: 1280px) { .db-kpis-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .db-kpis-5 > :nth-child(5) { grid-column: span 1; } }
-@media (max-width: 1100px) { .db-kpis, .db-kpis-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .db-kpis-5 > :nth-child(5) { grid-column: 1 / -1; } }
+.db-kpis-5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.db-kpis-5 > * { grid-column: span 2; }
+.db-kpis-5 > :nth-child(n+4) { grid-column: span 3; }
+@media (max-width: 1100px) {
+  .db-kpis, .db-kpis-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .db-kpis-5 > :nth-child(n) { grid-column: auto; }
+  .db-kpis-5 > :nth-child(5) { grid-column: 1 / -1; }
+}
 @media (max-width: 720px) { .db-kpis { gap: 10px; margin-bottom: 14px; } .db-kpis .nx-kpi-sub { font-size: 11.5px; } }
 
 .db-cols { display: grid; gap: 16px; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start; }
@@ -44,6 +49,7 @@
 .db-check::after { content: ""; position: absolute; inset: -9px; } /* bigger tap target */
 .db-check:hover { border-color: var(--green); color: var(--green); }
 .db-check.is-done { background: var(--green); border-color: var(--green); color: #fff; }
+.db-today .nx-list-main b, .db-card .nx-list-main b { white-space: normal; overflow-wrap: anywhere; }
 .db-meta { display: flex !important; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-top: 2px; }
 .db-meta a { color: var(--gold-deep); font-weight: 600; }
 .db-meta a:hover { text-decoration: underline; }
@@ -281,3 +287,5 @@ html[lang="ar"] .an-tip b { font-family: var(--font); }
 .st-flow span { width: 40px; height: 40px; border-radius: 50%; background: var(--gold-soft); display: grid; place-items: center; }
 .st-flow i { flex: 0 1 48px; height: 1px; background: var(--line-strong); }
 .st-web-list { padding-inline-start: 18px; display: grid; gap: 8px; color: var(--ink-2); font-size: 13.5px; }
+.st-temp { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.st-temp code { flex: 1; font-family: var(--mono); font-size: 16px; font-weight: 600; background: var(--gold-soft); color: var(--ink); padding: 10px 12px; border-radius: 6px; letter-spacing: 0.04em; word-break: break-all; }

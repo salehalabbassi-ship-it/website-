@@ -80,7 +80,11 @@
       "set.inactive": "Inactive",
       "set.activeBadge": "Active",
       "set.tempPassword": "Temporary password",
-      "set.tempHint": "Share it with the person. They can change it under My account.",
+      "set.tempHint": "Leave empty to email a temporary password. If you set one, share it with the person — they can change it under My account.",
+      "set.tempHintDemo": "Demo mode: leave empty to use “demo”. They can change it under My account.",
+      "set.tempTitle": "Temporary password",
+      "set.tempShow": "Share this temporary password with {name}. It has also been emailed to {email}. They can change it under My account.",
+      "set.copy": "Copy",
       "set.resetPassword": "New password (optional)",
       "set.resetHint": "Leave empty to keep the current password.",
       "set.you": "You",
@@ -209,7 +213,11 @@
       "set.inactive": "غير نشط",
       "set.activeBadge": "نشط",
       "set.tempPassword": "كلمة مرور مؤقتة",
-      "set.tempHint": "شاركها مع الشخص، ويمكنه تغييرها من «حسابي».",
+      "set.tempHint": "اتركها فارغة لإرسال كلمة مرور مؤقتة بالبريد. وإذا حددتها فشاركها مع الشخص، ويمكنه تغييرها من «حسابي».",
+      "set.tempHintDemo": "الوضع التجريبي: اتركها فارغة لاستخدام «demo». ويمكن تغييرها من «حسابي».",
+      "set.tempTitle": "كلمة المرور المؤقتة",
+      "set.tempShow": "شارك كلمة المرور المؤقتة هذه مع {name}. كما أُرسلت إلى بريده {email}. ويمكنه تغييرها من «حسابي».",
+      "set.copy": "نسخ",
       "set.resetPassword": "كلمة مرور جديدة (اختياري)",
       "set.resetHint": "اتركها فارغة للإبقاء على كلمة المرور الحالية.",
       "set.you": "أنت",
@@ -555,20 +563,31 @@
         { name: "name", label: T("c.name"), value: user && user.name, required: true, full: true },
         { name: "email", label: T("c.email"), type: "email", value: user && user.email, required: isNew, full: true, attrs: isNew ? ' autocomplete="off"' : " disabled" },
         { name: "role", label: T("set.role"), type: "select", options: roleOpts(), value: (user && user.role) || "staff", full: true, attrs: lock },
-        isNew ? { name: "password", label: T("set.tempPassword"), value: "", required: true, full: true, hint: T("set.tempHint"), attrs: ' autocomplete="new-password" minlength="6"', dir: "ltr" }
+        isNew ? { name: "password", label: T("set.tempPassword"), value: "", full: true, hint: T(NX.store.demo ? "set.tempHintDemo" : "set.tempHint"), attrs: ' autocomplete="new-password"', dir: "ltr" }
           : { name: "password", label: T("set.resetPassword"), type: "text", value: "", full: true, hint: T("set.resetHint"), attrs: ' autocomplete="new-password"', dir: "ltr" },
         isNew ? null : { name: "active", label: T("set.active"), type: "checkbox", value: user.active, full: true, attrs: lock }
       ].filter(Boolean)) + (self ? '<p class="nx-note-box st-mt">' + esc(T("set.selfNote")) + "</p>" : ""),
       onSubmit: function (d) {
         var pw = String(d.password || "");
-        if ((isNew || pw) && pw.length < 6) { NX.ui.toast(T("set.pwShort"), "error"); return false; }
+        if (pw && pw.length < 6) { NX.ui.toast(T("set.pwShort"), "error"); return false; }
         if (isNew && NX.store.users().some(function (u) { return u.email === String(d.email).toLowerCase(); })) { NX.ui.toast(T("set.userExists"), "error"); return false; }
-        var rec = isNew ? { email: d.email, name: d.name, role: d.role, active: true, password: pw }
+        var rec = isNew ? { email: d.email, name: d.name, role: d.role, active: true }
           : { email: user.email, name: d.name, role: self ? user.role : d.role, active: self ? true : !!d.active };
-        if (!isNew && pw) rec.password = pw;
-        return NX.ui.run(NX.store.saveUser(rec));
+        if (pw) rec.password = pw;
+        return NX.ui.run(NX.store.saveUser(rec)).then(function (res) {
+          if (res && res.tempPassword) showTempPassword(rec, res.tempPassword);
+        });
       }
     });
+  }
+  function showTempPassword(user, pw) {
+    var m = NX.ui.modal({
+      title: T("set.tempTitle"), size: "sm",
+      body: "<p>" + esc(T("set.tempShow", { name: user.name || user.email, email: user.email })) + "</p>" +
+        '<div class="st-temp"><code dir="ltr">' + esc(pw) + "</code>" + NX.ui.btn({ label: T("set.copy"), icon: "copy", act: "copy-pw", cls: "sm ghost" }) + "</div>",
+      onSubmit: function () {}, submitLabel: T("c.close")
+    });
+    NX.ui.on(m.el, "click", "[data-act=copy-pw]", function () { NX.ui.copy(pw); });
   }
   function wireTeam(el) {
     if (!el.querySelector(".st-team")) return;

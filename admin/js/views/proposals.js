@@ -582,7 +582,7 @@
       cols: [
         { label: NX.t("prop.number"), cls: "pr-c-num", render: function (p) { return '<span class="nx-num pr-numtag">' + esc(p.number || "—") + '</span><span class="pr-m-badge">' + statusBadge(p) + "</span>"; } },
         { label: NX.t("prop.clientTitle"), cls: "pr-c-client", render: function (p) {
-          return '<span class="nx-cell-title">' + esc(p.client || p.clientCompany || NX.t("c.none")) + (p.client && p.clientCompany ? ' <span class="pr-co">· ' + esc(p.clientCompany) + "</span>" : "") + '</span><span class="nx-cell-sub">' + esc(p.title || NX.t("prop.untitled")) + "</span>";
+          return '<span class="nx-cell-title" dir="auto">' + esc(p.client || p.clientCompany || NX.t("c.none")) + (p.client && p.clientCompany ? ' <span class="pr-co">· ' + esc(p.clientCompany) + "</span>" : "") + '</span><span class="nx-cell-sub" dir="auto">' + esc(p.title || NX.t("prop.untitled")) + "</span>";
         } },
         { label: NX.t("c.service"), cls: "pr-c-svc", render: function (p) { return esc(svcLabel(p.service) || NX.t("c.none")); } },
         { label: NX.t("c.date"), cls: "nx-nowrap", render: function (p) { return esc(NX.fmt.date(p.date)); } },
@@ -641,7 +641,7 @@
     var c = totals(p);
     return '<div class="pr-totals">' +
       '<div><span>' + esc(NX.t("prop.subtotal")) + '</span><b class="nx-num">' + esc(money(c.subtotal)) + "</b></div>" +
-      (c.discount ? '<div><span>' + esc(NX.t("prop.discount")) + '</span><b class="nx-num">−' + esc(money(c.discount)) + "</b></div>" +
+      (c.discount ? '<div><span>' + esc(NX.t("prop.discount")) + '</span><b class="nx-num"><bdi dir="ltr">−' + esc(m2(c.discount)) + "</bdi> " + esc(NX.t("c.sar")) + "</b></div>" +
         '<div><span>' + esc(NX.t("prop.net")) + '</span><b class="nx-num">' + esc(money(c.net)) + "</b></div>" : "") +
       '<div><span>' + esc(NX.t("prop.vat")) + ' <span class="nx-num">(' + esc(NX.fmt.num(c.vatRate)) + '%)</span></span><b class="nx-num">' + esc(money(c.vat)) + "</b></div>" +
       '<div class="pr-grand"><span>' + esc(NX.t("prop.grand")) + '</span><b class="nx-num">' + esc(money(c.total)) + "</b></div>" +
@@ -651,7 +651,7 @@
   function bulletList(text) {
     var ls = lines(text);
     if (!ls.length) return '<p class="nx-muted">' + esc(NX.t("c.none")) + "</p>";
-    return '<ul class="pr-bullets">' + ls.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>";
+    return '<ul class="pr-bullets">' + ls.map(function (l) { return '<li dir="auto">' + esc(l) + "</li>"; }).join("") + "</ul>";
   }
 
   function renderDetail(el, id) {
@@ -679,7 +679,7 @@
       rows: (p.items || []).filter(function (it) { return it.desc || num(it.rate); }),
       empty: NX.t("prop.noItems"),
       cols: [
-        { label: NX.t("prop.desc"), cls: "pr-d-desc", render: function (it) { return '<span class="nx-pre">' + esc(it.desc || NX.t("c.none")) + "</span>"; } },
+        { label: NX.t("prop.desc"), cls: "pr-d-desc", render: function (it) { return '<span class="nx-pre" dir="auto">' + esc(it.desc || NX.t("c.none")) + "</span>"; } },
         { label: NX.t("prop.qty"), cls: "nx-right", render: function (it) { return '<span class="nx-num">' + esc(NX.fmt.num(it.qty)) + "</span>"; } },
         { label: NX.t("prop.unit"), render: function (it) { return esc(it.unit || ""); } },
         { label: NX.t("prop.rate"), cls: "nx-right nx-nowrap", render: function (it) { return '<span class="nx-num">' + esc(m2(it.rate)) + "</span>"; } },
@@ -690,7 +690,7 @@
     var pays = (p.payments || []);
     var paySum = pays.reduce(function (s, x) { return s + num(x.percent); }, 0);
     var payHtml = pays.length ? '<ul class="nx-list pr-pay-list">' + pays.map(function (x, i) {
-      return '<li><span class="pr-pay-n nx-num">' + (i + 1) + '</span><div class="nx-list-main"><b>' + esc(x.label || NX.t("prop.milestone")) + '</b></div><span class="nx-num pr-pay-pct">' + esc(NX.fmt.num(x.percent)) + '%</span><span class="nx-num pr-pay-amt">' + esc(money(c.total * num(x.percent) / 100)) + "</span></li>";
+      return '<li><span class="pr-pay-n nx-num">' + (i + 1) + '</span><div class="nx-list-main"><b dir="auto">' + esc(x.label || NX.t("prop.milestone")) + '</b></div><span class="nx-num pr-pay-pct">' + esc(NX.fmt.num(x.percent)) + '%</span><span class="nx-num pr-pay-amt">' + esc(money(c.total * num(x.percent) / 100)) + "</span></li>";
     }).join("") + "</ul>" + (Math.abs(paySum - 100) > 0.001 ? '<div class="pr-warn">' + esc(NX.t("prop.payWarn", { n: NX.fmt.num(paySum) })) + "</div>" : "")
       : '<div class="nx-card-body"><p class="nx-muted">' + esc(NX.t("prop.noPayments")) + "</p></div>";
 
@@ -699,8 +699,8 @@
       NX.ui.card(NX.t("prop.secScope"), '<div class="nx-grid-2"><div><h3 class="pr-h3">' + esc(NX.t("prop.scope")) + "</h3>" + bulletList(p.scope) + '</div><div><h3 class="pr-h3">' + esc(NX.t("prop.exclusions")) + "</h3>" + bulletList(p.exclusions) + "</div></div>") +
       NX.ui.card(NX.t("prop.secPayments"), payHtml, { flush: true }) +
       ((p.terms || p.notes) ? NX.ui.card(NX.t("prop.secTerms"),
-        (p.terms ? '<h3 class="pr-h3">' + esc(NX.t("prop.terms")) + '</h3><p class="nx-pre">' + esc(p.terms) + "</p>" : "") +
-        (p.notes ? '<h3 class="pr-h3' + (p.terms ? " pr-mt" : "") + '">' + esc(NX.t("prop.notes")) + '</h3><div class="nx-note-box nx-pre">' + esc(p.notes) + "</div>" : "")) : "");
+        (p.terms ? '<h3 class="pr-h3">' + esc(NX.t("prop.terms")) + '</h3><p class="nx-pre" dir="auto">' + esc(p.terms) + "</p>" : "") +
+        (p.notes ? '<h3 class="pr-h3' + (p.terms ? " pr-mt" : "") + '">' + esc(NX.t("prop.notes")) + '</h3><div class="nx-note-box nx-pre" dir="auto">' + esc(p.notes) + "</div>" : "")) : "");
 
     // Status card
     var note = st === "draft" ? NX.t("prop.statusDraftNote")
