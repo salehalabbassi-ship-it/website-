@@ -53,7 +53,7 @@
 .pj-status-sel { position: relative; display: inline-flex; align-items: center; gap: 6px; border-radius: 20px; padding: 0 8px 0 10px; height: 28px; cursor: pointer; }
 [dir="rtl"] .pj-status-sel { padding: 0 10px 0 8px; }
 .pj-status-sel select { appearance: none; -webkit-appearance: none; border: 0; background: transparent; font-weight: 600; font-size: 12.5px; color: inherit; cursor: pointer; padding-inline-end: 16px; outline: 0; height: 100%; }
-.pj-status-sel::after { content: ""; position: absolute; inset-inline-end: 10px; top: 50%; width: 6px; height: 6px; border-inline-end: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+.pj-status-sel::after { content: ""; position: absolute; inset-inline-end: 10px; top: 50%; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
 .pj-status-sel:focus-within { box-shadow: 0 0 0 3px rgba(183, 154, 95, 0.25); }
 
 .pj-detail { align-items: start; }
@@ -308,4 +308,9 @@ html[lang="ar"] .tp-cl-ph-h { text-transform: none; letter-spacing: 0; font-size
   .tp-task { grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); grid-template-areas: "text text" "phase btns"; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); }
   .tp-task-n { display: none; }
   .tp-task-text { grid-area: text; } .tp-task-phase { grid-area: phase; } .tp-task-btns { grid-area: btns; justify-content: flex-end; }
+}
+@media (max-width: 560px) {
+  /* Keep short selects (service / language / channel) side by side in template editors */
+  .tp-msg-form .nx-form-grid, .tp-cl-form .nx-form-grid, .nx-form-grid.tp-pform { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .nx-form-grid.tp-pform > .nx-field:has(textarea) { grid-column: 1 / -1; }
 }

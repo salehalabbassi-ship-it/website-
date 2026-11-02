@@ -67,6 +67,9 @@ html[lang="ar"] .pr-h3 { text-transform: none; letter-spacing: 0; font-size: 13p
   .pr-d-desc { min-width: 0; }
   .pr-detail + * { margin-top: 0; }
 }
+.pr-status-m { display: none; }
+@media (min-width: 1101px) { .pr-detail .nx-stack > .pr-status-m + * { margin-top: 0; } }
+@media (max-width: 1100px) { .pr-status-m { display: block; } .pr-status-d { display: none; } .pr-detail .nx-stack > .pr-status-d + * { margin-top: 0; } }
 @media (min-width: 1101px) { .pr-side { position: sticky; top: calc(var(--top-h) + 16px); align-self: start; } }
 
 /* ---------- Editor ---------- */

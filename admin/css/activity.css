@@ -122,7 +122,9 @@ html[lang="ar"] .fu-menu-h { letter-spacing: 0; text-transform: none; font-size:
 .fu-empty > .nx-ic { width: 52px; height: 52px; padding: 12px; border-radius: 50%; background: var(--green-soft); color: var(--green); }
 
 /* forms */
-.fu-quick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -6px; }
+.fu-when { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 8px 14px; }
+.fu-when .fu-quick { grid-column: 1 / -1; }
+.fu-quick { display: flex; flex-wrap: wrap; gap: 6px; }
 .fu-quick .nx-chip { height: 30px; }
 .fu-next-text { margin-bottom: 14px; color: var(--ink-2); }
 
@@ -139,7 +141,6 @@ html[lang="ar"] .fu-menu-h { letter-spacing: 0; text-transform: none; font-size:
   .fu-owner-seg button span { display: none; }
   .fu-owner-seg button { padding: 0 11px; }
   .fu-check { width: 32px; height: 32px; }
-  .fu-page-actions-hide { display: none; }
 }
 @media (max-width: 720px) {
   .nx-view-followups .nx-page-actions .nx-btn-ghost span { display: none; }
@@ -171,7 +172,7 @@ html[lang="ar"] .fu-menu-h { letter-spacing: 0; text-transform: none; font-size:
 .cv-c-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .cv-c-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .cv-c-top b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cv-c-top time { font-size: 11.5px; color: var(--muted); white-space: nowrap; flex: none; }
+.cv-c-top time { font-variant-numeric: tabular-nums; font-size: 11.5px; color: var(--muted); white-space: nowrap; flex: none; }
 .cv-c-sub { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cv-c-snip { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink-2); margin-top: 3px; min-width: 0; }
 .cv-snip-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }

@@ -382,7 +382,12 @@
     ["title", "service", "client", "clientCompany", "phone", "email", "lang", "notes"].forEach(function (k) { if (prefill[k]) p[k] = prefill[k]; });
     return p;
   }
+  function svcName(id, l) {
+    var o = (settings().services || []).find(function (x) { return x.id === id; });
+    return o ? (l === "ar" ? o.ar : o.en) : "";
+  }
   function applyLead(p, lead) {
+    if (!p.title && lead.service) p.title = NX.opt("services", lead.service) + " — " + (lead.company || lead.name || "");
     p.leadId = lead.id;
     p.client = lead.name || "";
     p.clientCompany = lead.company || "";
@@ -473,13 +478,16 @@
 
   /* Fallback message text when the conversations module isn't available. */
   var MSG = {
-    en: "Hello {name},\n\nPlease find attached our quotation {number} for {title}.\nTotal: {total} SAR (incl. VAT), valid until {valid}.\n\nBest regards,\n{me}\n{company}\n{phone}",
-    ar: "مرحباً {name}،\n\nنرفق لكم عرض السعر رقم {number} بخصوص {title}.\nالإجمالي: {total} ريال (شامل الضريبة)، والعرض صالح حتى {valid}.\n\nمع التحية،\n{me}\n{company}\n{phone}"
+    en: "Hello {name},\n\nPlease find attached our quotation {number}{title}.\nTotal: {total} SAR (incl. VAT), valid until {valid}.\n\nBest regards,\n{me}\n{company}\n{phone}",
+    ar: "مرحباً {name}،\n\nنرفق لكم عرض السعر رقم {number}{title}.\nالإجمالي: {total} ريال (شامل الضريبة)، والعرض صالح حتى {valid}.\n\nمع التحية،\n{me}\n{company}\n{phone}"
   };
   function fallbackText(p) {
     var l = p.lang === "ar" ? "ar" : p.lang === "en" ? "en" : (NX.i18n.isAr ? "ar" : "en");
     var c = settings().company, me = NX.store.session || {};
-    var vars = { name: p.client || "", number: p.number || "", title: p.title || "", total: m2(totals(p).total), valid: p.validUntil || "", me: me.name || "", company: l === "ar" ? c.nameAr : c.nameEn, phone: c.phone || "" };
+    var title = p.title || svcName(p.service, l);
+    var vx = NX.fmt.toDate(p.validUntil);
+    var valid = !vx ? "—" : l === "ar" ? vx.toLocaleDateString("ar-SA-u-nu-latn-ca-gregory", { day: "numeric", month: "long", year: "numeric" }) : vx.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    var vars = { name: p.client || "", number: p.number || "", title: title ? (l === "ar" ? " بخصوص " : " for ") + title : "", total: m2(totals(p).total), valid: valid, me: me.name || "", company: l === "ar" ? c.nameAr : c.nameEn, phone: c.phone || "" };
     var s = MSG[l];
     Object.keys(vars).forEach(function (k) { s = s.split("{" + k + "}").join(vars[k]); });
     return { text: s, subject: (l === "ar" ? "عرض سعر " : "Quotation ") + (p.number || "") + (p.title ? " — " + p.title : "") };
@@ -513,8 +521,25 @@
     };
     if (NX.actions.sendMessage) {
       var r = NX.actions.sendMessage({ proposal: p, lead: lead || undefined, channel: channel });
-      if (r && typeof r.then === "function") r.then(after, function () {});
-      else after(true);
+      if (r && typeof r.then === "function") { r.then(after, function () {}); return; }
+      var form = r && r.el;
+      if (!form || !form.querySelector) { after(true); return; }
+      // Pre-fill the composer (number + total) when no template text is there yet.
+      var fb = fallbackText(p);
+      var bodyEl = form.querySelector('[name="body"]'), subjEl = form.querySelector('[name="subject"]');
+      if (bodyEl && !bodyEl.value) bodyEl.value = fb.text;
+      if (subjEl && !subjEl.value) subjEl.value = fb.subject;
+      // Mark as sent only when the composer is submitted and closes (not when cancelled).
+      var submitted = false;
+      form.addEventListener("submit", function () { submitted = true; });
+      form.addEventListener("click", function (e) { if (e.target.closest("[data-close]")) submitted = false; });
+      var host = document.getElementById("nx-modals");
+      var obs = new MutationObserver(function () {
+        if (document.body.contains(form)) return;
+        obs.disconnect();
+        if (submitted) after(true);
+      });
+      obs.observe(host, { childList: true, subtree: true });
       return;
     }
     var m = fallbackText(p);
@@ -750,7 +775,7 @@
     el.innerHTML =
       '<a class="nx-back" href="#/proposals">' + NX.icon("back", 16) + esc(NX.t("prop.backList")) + "</a>" +
       head +
-      '<div class="nx-split pr-detail"><div class="nx-stack">' + main + '</div><div class="nx-stack pr-side">' + statusCard + clientCard + infoCard + "</div></div>";
+      '<div class="nx-split pr-detail"><div class="nx-stack"><div class="pr-status-m">' + statusCard + "</div>" + main + '</div><div class="nx-stack pr-side"><div class="pr-status-d">' + statusCard + "</div>" + clientCard + infoCard + "</div></div>";
 
     var cur = function () { return NX.store.get("proposals", id) || p; };
     NX.ui.on(el, "click", "[data-act=edit]", function () { NX.go("proposals/" + id + "/edit"); });
@@ -1110,7 +1135,7 @@
       if (vars) Object.keys(vars).forEach(function (v) { en = en.split("{" + v + "}").join(vars[v][0]); ar = ar.split("{" + v + "}").join(vars[v][1]); });
       if (lang === "en") return esc(en);
       if (lang === "ar") return esc(ar);
-      return stack ? '<span class="pr-l-en">' + esc(en) + '</span><span class="pr-l-ar" lang="ar" dir="rtl">' + esc(ar) + "</span>"
+      return stack ? '<span class="pr-l-en">' + esc(en) + '</span><span class="pr-l-ar" lang="ar">' + esc(ar) + "</span>"
         : '<span class="pr-l-en">' + esc(en) + '</span><span class="pr-l-sep"> / </span><span class="pr-l-ar" lang="ar" dir="rtl">' + esc(ar) + "</span>";
     };
     var ltr = function (s, cls) { return '<span class="pr-ltr' + (cls ? " " + cls : "") + '" dir="ltr">' + esc(s) + "</span>"; };
@@ -1121,7 +1146,12 @@
     };
     var svc = (settings().services || []).find(function (s) { return s.id === p.service; });
     var svcTxt = svc ? (isAr ? svc.ar : both ? svc.en + " · " + svc.ar : svc.en) : "";
-    var unitTxt = function (u) { u = u || ""; if (isAr && UNIT_AR[u]) return UNIT_AR[u]; if (both && UNIT_AR[u]) return u + " / " + UNIT_AR[u]; return u; };
+    var unitHtml = function (u) {
+      u = u || "";
+      if (isAr && UNIT_AR[u]) return esc(UNIT_AR[u]);
+      if (both && UNIT_AR[u]) return '<bdi dir="ltr">' + esc(u) + '</bdi> / <bdi class="pr-l-ar" dir="rtl">' + esc(UNIT_AR[u]) + "</bdi>";
+      return '<bdi dir="auto">' + esc(u) + "</bdi>";
+    };
     var sar = isAr ? DOC.sar[1] : DOC.sar[0];
 
     // Header band
@@ -1146,7 +1176,7 @@
       '<span>' + (addr ? addr : "") + (legal.length ? '<i class="pr-sep"></i>' + legal.join('<i class="pr-sep"></i>') : "") + "</span></div>";
 
     // Title + meta
-    var titleHtml = both ? '<h1><span class="pr-t-en">QUOTATION</span><span class="pr-t-ar" dir="rtl">عرض سعر</span></h1>'
+    var titleHtml = both ? '<h1><span class="pr-t-en">QUOTATION</span><span class="pr-t-ar">عرض سعر</span></h1>'
       : isAr ? '<h1><span class="pr-t-ar">عرض سعر</span></h1>' : '<h1><span class="pr-t-en">QUOTATION</span></h1>';
     var meta = '<table class="pr-d-meta"><tbody>' +
       "<tr><th>" + L("no") + "</th><td>" + ltr(p.number || "—", "pr-mono pr-strong") + "</td></tr>" +
@@ -1172,7 +1202,7 @@
         '<td class="pr-c-n">' + (i + 1) + "</td>" +
         '<td class="pr-c-desc">' + esc(it.desc || "").replace(/\n/g, "<br>") + "</td>" +
         '<td class="pr-c-q pr-mono">' + esc(NX.fmt.num(it.qty)) + "</td>" +
-        '<td class="pr-c-u">' + esc(unitTxt(it.unit)) + "</td>" +
+        '<td class="pr-c-u">' + unitHtml(it.unit) + "</td>" +
         '<td class="pr-c-m pr-mono">' + m2(it.rate) + "</td>" +
         '<td class="pr-c-m pr-mono pr-strong">' + m2(num(it.qty) * num(it.rate)) + "</td>" +
         "</tr>";
@@ -1193,7 +1223,7 @@
       trow(L("subtotal"), m2(c.subtotal)) +
       (c.discount ? trow(L("discount"), "− " + m2(c.discount)) + trow(L("net"), m2(c.net)) : "") +
       trow(L("vat") + ' <span class="pr-mono">(' + NX.fmt.num(c.vatRate) + "%)</span>", m2(c.vat)) +
-      '<tr class="pr-d-grand"><th>' + L("total") + "</th><td>" + ltr(m2(c.total) + " " + DOC.sar[0], "pr-mono") + "</td></tr>" +
+      '<tr class="pr-d-grand"><th>' + L("total") + "</th><td>" + ltr(m2(c.total) + " " + sar, "pr-mono") + "</td></tr>" +
       "</tbody></table></div>";
 
     // Scope / exclusions
@@ -1268,12 +1298,12 @@
     ".pr-doc .pr-d-contact{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;font-size:7.8pt;color:var(--pr-muted);padding:7px 2px 0}",
     /* title */
     ".pr-doc .pr-d-title{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:22px 0 16px;padding-bottom:14px;border-bottom:1px solid var(--pr-line)}",
-    ".pr-doc .pr-d-title h1{display:flex;flex-direction:column;gap:2px;line-height:1.1}",
+    ".pr-doc .pr-d-title h1{display:flex;flex-direction:column;gap:2px;line-height:1.1;white-space:nowrap}",
     ".pr-doc .pr-t-en{font-size:22pt;font-weight:800;letter-spacing:.2em;color:var(--pr-ink)}",
     ".pr-doc .pr-t-ar{font-size:17pt;font-weight:700;color:var(--pr-gold-d)}",
     ".pr-doc[dir=rtl] .pr-t-ar{font-size:24pt;color:var(--pr-ink)}",
     ".pr-doc .pr-d-title h1::after{content:'';display:block;width:44px;height:2px;background:var(--pr-gold);margin-top:8px}",
-    ".pr-doc .pr-d-meta{border-collapse:collapse;font-size:8.8pt}",
+    ".pr-doc .pr-d-meta{width:auto;border-collapse:collapse;font-size:8.8pt}",
     ".pr-doc .pr-d-meta th{text-align:start;font-weight:600;color:var(--pr-muted);padding:2px 14px 2px 0;white-space:nowrap}",
     ".pr-doc[dir=rtl] .pr-d-meta th{padding:2px 0 2px 14px}",
     ".pr-doc .pr-d-meta td{text-align:end;padding:2px 0;white-space:nowrap}",
@@ -1290,8 +1320,10 @@
     ".pr-doc tr{break-inside:avoid;page-break-inside:avoid}",
     ".pr-doc .pr-d-items th,.pr-doc .pr-d-pay th{background:#1b1b1b;color:#fff;font-weight:600;font-size:7.8pt;text-align:start;padding:7px 9px;vertical-align:bottom;letter-spacing:.04em}",
     ".pr-doc[dir=rtl] .pr-d-items th,.pr-doc[dir=rtl] .pr-d-pay th{font-size:9pt;letter-spacing:0}",
-    ".pr-doc th .pr-l-en,.pr-doc th .pr-l-ar{display:block}",
-    ".pr-doc th .pr-l-ar{font-size:8pt;font-weight:500;color:#d9c9a3;margin-top:1px}",
+    ".pr-doc thead th .pr-l-en,.pr-doc thead th .pr-l-ar{display:block}",
+    ".pr-doc thead th .pr-l-ar{font-size:8pt;font-weight:500;color:#d9c9a3;margin-top:1px}",
+    ".pr-doc .pr-l-ar{unicode-bidi:isolate}",
+    ".pr-doc tbody th{white-space:nowrap}",
     ".pr-doc .pr-cur{font-weight:400;opacity:.75;font-size:.9em}",
     ".pr-doc .pr-d-items td,.pr-doc .pr-d-pay td{padding:8px 9px;border-bottom:1px solid var(--pr-line);vertical-align:top}",
     ".pr-doc .pr-d-items tbody tr:nth-child(even) td,.pr-doc .pr-d-pay tbody tr:nth-child(even) td{background:#fbfaf7}",

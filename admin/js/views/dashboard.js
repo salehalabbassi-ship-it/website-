@@ -225,7 +225,7 @@
   function newLeadsCard(list) {
     list = list.slice().sort(function (a, b) { return String(b.createdAt || "").localeCompare(String(a.createdAt || "")); });
     var body = !list.length ? '<p class="db-none">' + esc(T("dash.noNew")) + "</p>" :
-      '<ul class="nx-list">' + list.slice(0, 6).map(function (l) {
+      '<ul class="nx-list db-newleads">' + list.slice(0, 6).map(function (l) {
         var svc = NX.opt("services", l.service);
         return '<li><a class="nx-list-main" href="#/leads/' + esc(l.id) + '"><b>' + esc(l.name || l.company || T("c.none")) + "</b>" +
           "<small>" + esc([l.company && l.name ? l.company : "", svc, NX.fmt.rel(l.createdAt)].filter(Boolean).join(" · ")) + "</small></a>" +

@@ -329,7 +329,7 @@
       }
       lines.push("SUMMARY:" + icsEsc(f.title || typeLabel(f.type)), "DESCRIPTION:" + icsEsc(desc));
       if (l) lines.push("URL:" + icsEsc(location.href.split("#")[0] + "#/leads/" + l.id));
-      lines.push("BEGIN:VALARM", "TRIGGER:-PT15M", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(f.title || ""), "END:VALARM", "END:VEVENT");
+      lines.push("BEGIN:VALARM", f.dueTime ? "TRIGGER:-PT15M" : "TRIGGER:PT9H", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(f.title || ""), "END:VALARM", "END:VEVENT");
     });
     lines.push("END:VCALENDAR");
     return lines.map(icsFold).join("\r\n") + "\r\n";
@@ -354,6 +354,13 @@
       var d = NX.fmt.addDays(t, q[0]);
       return '<button type="button" class="nx-chip' + (d === value ? " is-active" : "") + '" data-qd="' + d + '">' + esc(NX.t(q[1])) + "</button>";
     }).join("") + "</div>";
+  }
+  /* Due date + time + quick picks, kept together (2 columns even on phones) */
+  function whenFields(date, time) {
+    return '<div class="nx-full fu-when">' +
+      NX.ui.field({ name: "dueDate", label: NX.t("fu.f.due"), type: "date", required: true, value: date }) +
+      NX.ui.field({ name: "dueTime", label: NX.t("fu.f.time"), type: "time", value: time || "" }) +
+      quickDates("dueDate", date) + "</div>";
   }
   function wireQuickDates(formEl) {
     var sync = function () {
@@ -407,9 +414,7 @@
     var body = '<div class="nx-form-grid">' +
       NX.ui.field({ name: "title", label: NX.t("fu.f.title"), required: true, full: true, value: rec.title, placeholder: NX.t("fu.f.titlePh"), attrs: ' dir="auto" autocomplete="off"' }) +
       typePicker(rec.type) +
-      NX.ui.field({ name: "dueDate", label: NX.t("fu.f.due"), type: "date", required: true, value: rec.dueDate }) +
-      NX.ui.field({ name: "dueTime", label: NX.t("fu.f.time"), type: "time", value: rec.dueTime }) +
-      quickDates("dueDate", rec.dueDate) +
+      whenFields(rec.dueDate, rec.dueTime) +
       NX.ui.field({ name: "leadId", label: NX.t("fu.f.linkLead"), type: "select", options: leadOptions(), value: rec.leadId }) +
       NX.ui.field({ name: "projectId", label: NX.t("fu.f.linkProject"), type: "select", options: projectOptions(), value: rec.projectId }) +
       NX.ui.field({ name: "owner", label: NX.t("c.owner"), type: "select", options: users, value: rec.owner }) +
@@ -448,9 +453,7 @@
     var body = '<p class="fu-next-text">' + esc(name ? NX.t("fu.next.text", { name: name }) : NX.t("fu.next.textNoName")) + "</p>" +
       '<div class="nx-form-grid">' +
       NX.ui.field({ name: "title", label: NX.t("fu.f.title"), required: true, full: true, value: f.title || "", attrs: ' dir="auto" autocomplete="off"' }) +
-      NX.ui.field({ name: "dueDate", label: NX.t("fu.f.due"), type: "date", required: true, value: d }) +
-      NX.ui.field({ name: "dueTime", label: NX.t("fu.f.time"), type: "time", value: "" }) +
-      quickDates("dueDate", d) +
+      whenFields(d, "") +
       "</div>";
     NX.ui.modal({
       title: NX.t("fu.next.title"),

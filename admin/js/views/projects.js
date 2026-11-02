@@ -434,8 +434,8 @@
       [NX.t("proj.start"), p.startDate ? '<span class="nx-num">' + esc(NX.fmt.date(p.startDate)) + "</span>" : "—"],
       [NX.t("proj.due"), p.dueDate ? '<span class="nx-num">' + esc(NX.fmt.date(p.dueDate)) + "</span>" + (due.text ? ' <span class="pj-due-tag' + (due.over ? " is-over" : due.soon ? " is-soon" : "") + '">' + esc(due.text) + "</span>" : "") : "—"],
       [NX.t("c.owner"), p.owner ? '<span class="pj-owner">' + NX.ui.avatar(NX.userName(p.owner)) + esc(NX.userName(p.owner)) + "</span>" : "—"],
-      [NX.t("proj.linkedLead"), lead ? '<a class="nx-link" href="#/leads/' + esc(lead.id) + '">' + esc(lead.name || lead.company || "") + "</a>" + (lead.company && lead.name ? ' <span class="nx-muted nx-small">' + esc(lead.company) + "</span>" : "") : "—"],
-      [NX.t("proj.linkedProposal"), proposal ? '<a class="nx-link" href="#/proposals/' + esc(proposal.id) + '"><span class="nx-mono">' + esc(proposal.number || "") + "</span></a>" + (proposal.title ? ' <span class="nx-muted nx-small">' + esc(proposal.title) + "</span>" : "") : "—"]
+      [NX.t("proj.linkedLead"), lead ? '<a class="nx-link" href="#/leads/' + esc(lead.id) + '">' + esc(lead.name || lead.company || "") + "</a>" + (lead.company && lead.name ? ' <span class="nx-muted nx-small" dir="auto">' + esc(lead.company) + "</span>" : "") : "—"],
+      [NX.t("proj.linkedProposal"), proposal ? '<a class="nx-link" href="#/proposals/' + esc(proposal.id) + '"><span class="nx-mono">' + esc(proposal.number || "") + "</span></a>" + (proposal.title ? ' <span class="nx-muted nx-small" dir="auto">' + esc(proposal.title) + "</span>" : "") : "—"]
     ]);
 
     var cards = {

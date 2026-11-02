@@ -261,7 +261,7 @@
       : '<span class="cv-snip-t nx-muted">' + esc(NX.t("conv.noConv")) + "</span>";
     return '<a class="cv-contact' + (active ? " is-active" : "") + '" href="' + esc(ct.route) + '"' + (active ? ' aria-current="true"' : "") + ">" +
       contactAvatar(ct) +
-      '<span class="cv-c-main"><span class="cv-c-top"><b dir="auto">' + esc(ct.name) + "</b>" + (last ? '<time class="nx-num">' + esc(listTime(dateOf(last))) + "</time>" : "") + "</span>" +
+      '<span class="cv-c-main"><span class="cv-c-top"><b dir="auto">' + esc(ct.name) + "</b>" + (last ? '<time>' + esc(listTime(dateOf(last))) + "</time>" : "") + "</span>" +
       (ct.sub ? '<span class="cv-c-sub" dir="auto">' + esc(ct.sub) + "</span>" : "") +
       '<span class="cv-c-snip">' + snip + "</span></span></a>";
   }

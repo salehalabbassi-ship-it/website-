@@ -487,7 +487,7 @@
     p = p || {};
     return '<div class="tp-pay" data-pay>' +
       '<input class="nx-input" data-k="label" dir="auto" placeholder="' + esc(NX.t("tpl.payLabelPh")) + '" aria-label="' + esc(NX.t("tpl.payLabel")) + '" value="' + esc(p.label || "") + '" />' +
-      '<label class="tp-pct"><input class="nx-input nx-num" data-k="percent" type="number" step="any" min="0" max="100" inputmode="decimal" dir="ltr" value="' + esc(p.percent == null ? "" : p.percent) + '" /><span>%</span></label>' +
+      '<label class="tp-pct" dir="ltr"><input class="nx-input nx-num" data-k="percent" type="number" step="any" min="0" max="100" inputmode="decimal" dir="ltr" value="' + esc(p.percent == null ? "" : p.percent) + '" /><span>%</span></label>' +
       '<button type="button" class="nx-btn nx-btn-icon nx-btn-sm" data-act="row-del" title="' + esc(NX.t("tpl.removeRow")) + '" aria-label="' + esc(NX.t("tpl.removeRow")) + '">' + NX.icon("trash", 15) + "</button></div>";
   }
 
@@ -517,7 +517,7 @@
       '<div class="nx-full"><div data-pays class="tp-pays-ed">' + pays.map(payRow).join("") + "</div>" +
       '<div class="tp-pays-foot">' + NX.ui.btn({ label: NX.t("tpl.addPayment"), icon: "plus", act: "pay-add", cls: "ghost sm" }) + '<span class="tp-paysum" data-paysum></span></div></div>' +
       '<div class="nx-form-section">' + esc(NX.t("tpl.terms")) + "</div>" +
-      F({ name: "terms", label: NX.t("tpl.terms"), type: "textarea", rows: 3, full: true, value: d.terms, dir: "auto" }) +
+      F({ name: "terms", label: "", type: "textarea", rows: 3, full: true, value: d.terms, dir: "auto" }) +
       "</div>";
 
     NX.ui.modal({

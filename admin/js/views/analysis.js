@@ -161,6 +161,14 @@
   function moneyKpi(v) { var n = Math.abs(v) >= 1e6 ? NX.fmt.compact(v) : NX.fmt.money(v, { bare: true }); return esc(n) + ' <small class="an-cur">' + esc(T("c.sar")) + "</small>"; }
   function loc() { return NX.i18n.isAr ? "ar-SA-u-nu-latn-ca-gregory" : "en-GB"; }
   function propTotal(p) { try { return NX.calc.proposal(p).total; } catch (e) { return 0; } }
+  /* Translated sentence with each value bidi-isolated, so names/numbers don't scramble in RTL. Returns HTML. */
+  function take(key, vars) {
+    var marks = {}, out;
+    Object.keys(vars || {}).forEach(function (k) { marks[k] = "\u0001" + k + "\u0002"; });
+    out = esc(T(key, marks));
+    Object.keys(vars || {}).forEach(function (k) { out = out.split("\u0001" + k + "\u0002").join("<bdi>" + esc(vars[k]) + "</bdi>"); });
+    return out;
+  }
   function tipAttr(value, label) { return ' data-tip="' + esc(value) + '" data-tip-label="' + esc(label) + '" tabindex="0"'; }
 
   /* ---------- Compute everything for the selected period ---------- */
@@ -311,7 +319,7 @@
     opts = opts || {};
     return '<section class="nx-card an-card' + (opts.cls ? " " + opts.cls : "") + '"><div class="nx-card-head"><div><h2>' + esc(title) + "</h2>" +
       (opts.sub ? '<p class="an-sub">' + esc(opts.sub) + "</p>" : "") + "</div></div>" +
-      '<div class="nx-card-body">' + (take ? '<p class="an-take">' + esc(take) + "</p>" : "") + body +
+      '<div class="nx-card-body">' + (take ? '<p class="an-take">' + take + "</p>" : "") + body +
       (opts.note ? '<p class="an-note">' + esc(opts.note) + "</p>" : "") + "</div></section>";
   }
 
@@ -335,7 +343,7 @@
     /* Monthly */
     var totalYear = d.months.reduce(function (s, m) { return s + m.n; }, 0);
     var peak = d.months.reduce(function (b, m) { return m.n > b.n ? m : b; }, d.months[0]);
-    var monthlyTake = totalYear ? T("an.monthlyTake", { n: totalYear, m: peak.date.toLocaleDateString(loc(), { month: "long" }), c: peak.n }) : T("an.monthlyTakeNone");
+    var monthlyTake = totalYear ? take("an.monthlyTake", { n: totalYear, m: peak.date.toLocaleDateString(loc(), { month: "long" }), c: peak.n }) : esc(T("an.monthlyTakeNone"));
 
     /* Funnel */
     var first = d.funnel.length ? d.funnel[0].n : 0;
@@ -343,30 +351,30 @@
     var funnelBody = first ? hbars(d.funnel.map(function (f) {
       return { label: NX.i18n.pick(f.s), value: f.n, display: f.n + " · " + pct(f.n, first) + "%", tip: f.n + " · " + T("an.ofTotal", { p: pct(f.n, first) }) };
     })) : NX.ui.empty(T("an.noData"));
-    var funnelTake = first && wonStep ? T("an.funnelTake", { p: pct(wonStep.n, first), s: NX.i18n.pick(wonStep.s) }) : "";
+    var funnelTake = first && wonStep ? take("an.funnelTake", { p: pct(wonStep.n, first), s: NX.i18n.pick(wonStep.s) }) : "";
 
     /* Sources */
     var nLeads = d.leads.length;
     var srcBody = d.sources.length ? hbars(d.sources.map(function (s) {
       return { label: s.label, value: s.n, display: s.n + " · " + pct(s.n, nLeads) + "%" };
     })) : NX.ui.empty(T("an.noData"));
-    var srcTake = d.sources.length ? T("an.sourcesTake", { s: d.sources[0].label, p: pct(d.sources[0].n, nLeads) }) : "";
+    var srcTake = d.sources.length ? take("an.sourcesTake", { s: d.sources[0].label, p: pct(d.sources[0].n, nLeads) }) : "";
 
     /* Services */
     var svcBody = d.services.length ? hbars(d.services.map(function (s) {
       return { label: s.label, value: s.v, display: NX.fmt.compact(s.v), tip: NX.fmt.money(s.v) + " · " + T("an.kWonValueSub", { n: s.n }) };
     })) : NX.ui.empty(T("an.servicesNone"));
-    var svcTake = d.services.length ? T("an.servicesTake", { s: d.services[0].label, v: moneyShort(d.services[0].v) }) : "";
+    var svcTake = d.services.length ? take("an.servicesTake", { s: d.services[0].label, v: moneyShort(d.services[0].v) }) : "";
 
     /* Lost */
     var lostBody = d.reasons.length ? '<ul class="an-reasons">' + d.reasons.map(function (r) {
       return '<li><span>' + esc(r.label) + '</span><span class="nx-num an-reason-n">' + r.n + "</span></li>";
     }).join("") + "</ul>" : NX.ui.empty(T("an.lostNone"));
-    var lostTake = d.reasons.length ? T("an.lostTake", { r: d.reasons[0].label, n: d.reasons[0].n }) : "";
+    var lostTake = d.reasons.length ? take("an.lostTake", { r: d.reasons[0].label, n: d.reasons[0].n }) : "";
 
     /* Team */
     var leader = d.team.find(function (u) { return u.wonValue > 0 && u.email; });
-    var teamTake = leader ? T("an.teamTake", { u: leader.name, v: moneyShort(leader.wonValue) }) : T("an.teamNoneTake");
+    var teamTake = leader ? take("an.teamTake", { u: leader.name, v: moneyShort(leader.wonValue) }) : esc(T("an.teamNoneTake"));
     var teamBody = NX.ui.table({
       cols: [
         { label: T("an.person"), render: function (u) { return '<span class="an-person">' + NX.ui.avatar(u.name) + '<span><b class="nx-cell-title">' + esc(u.name) + "</b>" + (u.email ? '<small class="nx-cell-sub">' + esc(u.email) + "</small>" : "") + "</span></span>"; } },
@@ -392,7 +400,7 @@
       chartCard(T("an.lost"), lostTake, lostBody, { sub: periodLabel }) +
       "</div>" +
       '<section class="nx-card an-card an-team"><div class="nx-card-head"><div><h2>' + esc(T("an.team")) + '</h2><p class="an-sub">' + esc(periodLabel) + "</p></div></div>" +
-      '<div class="nx-card-body"><p class="an-take">' + esc(teamTake) + "</p></div>" +
+      '<div class="nx-card-body"><p class="an-take">' + teamTake + "</p></div>" +
       '<div class="nx-card-body nx-flush">' + teamBody + "</div>" +
       '<div class="nx-card-body"><p class="an-note">' + esc(T("an.teamNote")) + "</p></div></section>" +
       '<div class="an-tip" role="tooltip" hidden><b></b><small></small></div>';
@@ -414,7 +422,8 @@
       var x = r.left + r.width / 2 - host.left - tw / 2;
       x = Math.max(0, Math.min(x, host.width - tw));
       var y = r.top - host.top - th - 8;
-      if (t.classList.contains("an-col")) y = r.top - host.top + r.height * 0.15 - th;
+      var stack = t.querySelector(".an-col-stack");
+      if (stack) { var sr = stack.getBoundingClientRect(); y = Math.min(sr.top, r.bottom - 30) - host.top - th - 22; }
       tip.style.left = x + "px"; tip.style.top = Math.max(0, y) + "px";
     };
     var hide = function () { tip.hidden = true; };

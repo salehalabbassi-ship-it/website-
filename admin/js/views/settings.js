@@ -59,7 +59,7 @@
       "set.lockedWon": "This is the “won” stage. It can be renamed but not removed.",
       "set.lockedClosed": "This is a closing stage/status. It can be renamed but not removed.",
       "set.lockedSystem": "Used by the system (e.g. website enquiries). It can be renamed but not removed.",
-      "set.removeInUse": "{n} records use “{x}”. They will keep this value but it will show as plain text. Remove anyway?",
+      "set.removeInUse": "“{x}” is used by {n} record(s). They will keep this value, but it will show as plain text. Remove anyway?",
       "set.unsaved": "Unsaved changes",
       "set.discard": "Discard",
       "set.saveList": "Save list",
@@ -452,7 +452,7 @@
       '<div class="st-save st-save-list' + (d.dirty ? " is-dirty" : "") + '">' +
       NX.ui.btn({ label: T("set.addItem"), icon: "plus", act: "add-item" }) +
       '<span class="st-dirty">' + esc(T("set.unsaved")) + "</span>" +
-      NX.ui.btn({ label: T("set.discard"), act: "discard", cls: "ghost st-discard" }) +
+      NX.ui.btn({ label: T("set.discard"), act: "discard", cls: "ghost" }) +
       NX.ui.btn({ label: T("set.saveList"), icon: "check", act: "save-list", cls: "primary" }) +
       "</div></div>";
   }
@@ -587,6 +587,7 @@
         '<div class="st-temp"><code dir="ltr">' + esc(pw) + "</code>" + NX.ui.btn({ label: T("set.copy"), icon: "copy", act: "copy-pw", cls: "sm ghost" }) + "</div>",
       onSubmit: function () {}, submitLabel: T("c.close")
     });
+    var cancel = m.el.querySelector(".nx-modal-foot-r [data-close]"); if (cancel) cancel.remove();
     NX.ui.on(m.el, "click", "[data-act=copy-pw]", function () { NX.ui.copy(pw); });
   }
   function wireTeam(el) {
@@ -657,7 +658,7 @@
       (demo ? '<div class="st-action"><div><b>' + esc(T("set.importJson")) + "</b><small>" + esc(T("set.importHint")) + "</small></div>" +
         NX.ui.btn({ label: T("set.importJson"), icon: "upload", act: "import-json" }) + '<input type="file" accept="application/json,.json" data-import hidden /></div>' +
         '<div class="st-action"><div><b>' + esc(T("set.resetDemo")) + "</b><small>" + esc(T("set.resetConfirm")) + "</small></div>" +
-        NX.ui.btn({ label: T("set.resetDemo"), icon: "refresh", act: "reset-demo", cls: "danger" }) + "</div>" : "") +
+        NX.ui.btn({ label: T("set.resetDemo"), icon: "refresh", act: "reset-demo", cls: "ghost st-reset" }) + "</div>" : "") +
       "</div></section></div>";
   }
   /* Show file paths in steps as code (text is escaped first). */
