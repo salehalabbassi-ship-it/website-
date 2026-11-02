@@ -118,7 +118,11 @@ NX.store = (function () {
       body: JSON.stringify(body)
     })
       .catch(function () { throw new Error(NX.t("c.offline")); })
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        return r.json().catch(function () {
+          throw new Error(NX.i18n.isAr ? "استجابة غير صالحة من الخادم — تحقّق من نشر Apps Script ورابطه." : "The server sent an invalid reply — check the Apps Script deployment and URL.");
+        });
+      })
       .then(function (res) {
         if (!res || !res.ok) {
           var err = (res && res.error) || "Unknown error";
@@ -261,7 +265,8 @@ NX.store = (function () {
       emit("users", next, i === -1 ? "create" : "update");
     };
     if (DEMO) { apply(); demoPersist(); return delay(true); }
-    return call("saveUser", { user: user }).then(apply);
+    // The server may return { tempPassword } when it generated one for a new user.
+    return call("saveUser", { user: user }).then(function (res) { apply(); return res; });
   }
   function removeUser(email) {
     if (!isAdmin()) return Promise.reject(new Error(NX.t("c.adminOnly")));
