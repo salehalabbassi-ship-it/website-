@@ -97,11 +97,12 @@ html[lang="ar"] .fu-sec-h { letter-spacing: 0; text-transform: none; font-size: 
 .fu-menu[open] > summary { background: rgba(27, 27, 27, 0.07); color: var(--ink); }
 .fu-menu-pop {
   position: absolute; top: calc(100% + 4px); inset-inline-end: 0; z-index: 25; min-width: 230px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); padding: 6px; animation: nx-pop 0.14s ease;
+  border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); padding: 6px; animation: nx-pop 0.14s ease; width: max-content; max-width: 300px;
 }
 .fu-menu-pop button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 10px; border: 0; background: none; border-radius: 6px; font-size: 13.5px; text-align: start; cursor: pointer; color: var(--ink); }
 .fu-menu-pop button:hover { background: var(--gold-soft); }
 .fu-menu-pop button .nx-ic { color: var(--muted); }
+.fu-menu-pop button span { white-space: nowrap; }
 .fu-menu-pop button small { margin-inline-start: auto; color: var(--muted); font-size: 12px; white-space: nowrap; }
 .fu-menu-pop button.is-danger, .fu-menu-pop button.is-danger .nx-ic { color: var(--red); }
 .fu-menu-pop button.is-danger:hover { background: var(--red-soft); }

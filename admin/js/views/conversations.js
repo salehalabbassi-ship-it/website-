@@ -525,6 +525,7 @@
       channel: state.compChannel, direction: state.compDir, date: new Date().toISOString(), summary: text, by: me()
     };
     delete state.drafts[ct.key];
+    state.refocus = window.innerWidth > 860;
     return NX.ui.run(NX.store.save("conversations", rec), NX.t("conv.logged")).catch(function () { state.drafts[ct.key] = text; });
   }
 
@@ -574,7 +575,7 @@
         var mp = el.querySelector("[data-cv-msgs]");
         if (mp) mp.scrollTop = mp.scrollHeight;
         var ta = el.querySelector("[data-cv-text]");
-        if (ta) autoGrow(ta);
+        if (ta) { autoGrow(ta); if (state.refocus) { state.refocus = false; ta.focus(); } }
       }, 0);
 
       var lp = el.querySelector("[data-cv-list]");

@@ -171,6 +171,12 @@
     return x && x.getFullYear() === new Date().getFullYear() ? NX.fmt.dateShort(d) : NX.fmt.date(d);
   }
 
+  function doneLabel(f) {
+    if (!f.doneAt) return "";
+    var d = NX.fmt.iso(f.doneAt), t = niceDate(d), n = dayDiff(d);
+    return !NX.i18n.isAr && (n === 0 || n === -1) ? t.toLowerCase() : t;
+  }
+
   function ownerMode() {
     if (!state.owner || state.ownerFor !== me()) { state.owner = NX.store.isAdmin() ? "all" : "mine"; state.ownerFor = me(); }
     return state.owner;
@@ -252,7 +258,7 @@
     var owner = f.owner ? NX.userName(f.owner) : "";
     var when = open
       ? '<span class="fu-due' + (late ? " is-late" : "") + '" title="' + esc(f.dueDate ? NX.fmt.date(f.dueDate) : "") + '">' + NX.icon("calendar", 14) + '<span class="nx-num">' + esc(dueText(f)) + "</span></span>"
-      : '<span class="fu-due is-done">' + NX.icon("check", 14) + "<span>" + esc(NX.t("fu.doneAt", { t: f.doneAt ? niceDate(NX.fmt.iso(f.doneAt)) : "" })) + "</span></span>";
+      : '<span class="fu-due is-done">' + NX.icon("check", 14) + "<span>" + esc(NX.t("fu.doneAt", { t: doneLabel(f) })) + "</span></span>";
     var actions = "";
     if (open && phone) {
       actions += '<button type="button" class="nx-btn nx-btn-icon nx-btn-sm fu-wa" data-act="wa" title="' + esc(NX.t("c.whatsapp")) + '" aria-label="' + esc(NX.t("c.whatsapp")) + '">' + NX.icon("whatsapp", 18) + "</button>" +

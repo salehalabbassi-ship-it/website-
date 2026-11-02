@@ -80,7 +80,9 @@ NX.app = (function () {
   function badgeFor(id) {
     if (id === "followups") {
       var today = NX.fmt.today();
-      var n = NX.store.where("followups", function (f) { return f.status !== "done" && f.dueDate && f.dueDate <= today; }).length;
+      var me = NX.store.session.email, admin = NX.store.isAdmin();
+      // Staff see their own and unassigned items; admins see everyone's.
+      var n = NX.store.where("followups", function (f) { return f.status !== "done" && f.dueDate && f.dueDate <= today && (admin || !f.owner || f.owner === me); }).length;
       return n ? '<span class="nx-nav-badge">' + n + "</span>" : "";
     }
     if (id === "leads") {

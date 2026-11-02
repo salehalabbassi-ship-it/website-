@@ -33,6 +33,13 @@ step, no dependencies.
 - **Contact** — validated form + studio contact details
 - **Footer**
 
+## NEXA Workspace (`/admin`)
+
+A private team tool at `/admin`: Dashboard, Leads, Projects, Proposals (PDF
+quotations with 15% VAT), Follow-ups, Templates, Conversations, Analysis and
+Settings — Arabic/English, backed by a Google Sheet. It runs in demo mode until
+connected. Setup steps: [`admin/README.md`](admin/README.md).
+
 ## Run it
 
 No tooling required. Open `index.html` directly, or serve locally:
