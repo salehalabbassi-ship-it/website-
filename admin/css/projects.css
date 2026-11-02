@@ -294,7 +294,12 @@ html[lang="ar"] .tp-cl-ph-h { text-transform: none; letter-spacing: 0; font-size
   .tp-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .tp-toolbar .nx-search { flex: 1 1 100%; }
   .tp-langseg { margin-inline-start: 0; }
-  .tp-tab { padding: 0 10px; }
+  .tp-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; border-bottom: 0; overflow: visible; }
+  .tp-tab { height: 40px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); margin: 0; font-size: 12.5px; gap: 6px; min-width: 0; }
+  .tp-tab > span:not(.tp-tab-n) { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; text-align: start; }
+  .tp-tab.is-active { background: var(--charcoal); border-color: var(--charcoal); color: #fff; }
+  .tp-tab.is-active .nx-ic { color: var(--gold); }
+  .tp-tab.is-active .tp-tab-n { background: var(--gold); color: var(--charcoal); }
   .tp-items { border: 0; overflow: visible; }
   .tp-items-head { display: none; }
   .tp-item { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "desc desc desc" "qty unit rate" "amt amt del"; border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; background: var(--surface-2); }

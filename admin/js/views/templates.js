@@ -377,7 +377,7 @@
       (t.notes ? '<p class="tp-notes" dir="auto">' + esc(t.notes) + "</p>" : "") +
       '<div class="tp-card-actions">' +
       (u ? '<a class="nx-btn nx-btn-primary nx-btn-sm tp-act" href="' + esc(u) + '" target="_blank" rel="noopener">' + NX.icon("out", 15) + "<span>" + esc(NX.t("tpl.openLink")) + "</span></a>" +
-        sbtn(NX.t("tpl.copyLink"), "copy", "copy", t.id) +
+        sbtn(NX.t("tpl.copy"), "copy", "copy", t.id, "", NX.t("tpl.copyLink")) +
         '<a class="nx-btn nx-btn-wa nx-btn-sm tp-act" href="' + esc(wa) + '" target="_blank" rel="noopener" title="' + esc(NX.t("tpl.sendWaTitle")) + '">' + NX.icon("whatsapp", 15) + "<span>" + esc(NX.t("tpl.sendWa")) + "</span></a>" : "") +
       sbtn("", "edit", "edit", t.id, "tp-icon", NX.t("c.edit")) + delBtn(t) + "</div>";
   }
