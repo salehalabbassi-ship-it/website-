@@ -10,6 +10,10 @@
       "tpl.k.message": "Message templates",
       "tpl.k.document": "Documents",
       "tpl.k.checklist": "Project checklists",
+      "tpl.ks.proposal": "Proposals",
+      "tpl.ks.message": "Messages",
+      "tpl.ks.document": "Documents",
+      "tpl.ks.checklist": "Checklists",
       "tpl.new.proposal": "New proposal template",
       "tpl.new.message": "New message",
       "tpl.new.document": "Add document",
@@ -113,6 +117,10 @@
       "tpl.k.message": "قوالب الرسائل",
       "tpl.k.document": "المستندات",
       "tpl.k.checklist": "قوائم مهام المشاريع",
+      "tpl.ks.proposal": "العروض",
+      "tpl.ks.message": "الرسائل",
+      "tpl.ks.document": "المستندات",
+      "tpl.ks.checklist": "قوائم المهام",
       "tpl.new.proposal": "قالب عرض جديد",
       "tpl.new.message": "رسالة جديدة",
       "tpl.new.document": "إضافة مستند",
@@ -294,7 +302,7 @@
 
     var tabs = '<div class="tp-tabs" role="tablist">' + KINDS.map(function (k) {
       return '<button type="button" role="tab" class="tp-tab' + (k === state.tab ? " is-active" : "") + '" data-tab="' + k + '" aria-selected="' + (k === state.tab) + '">' +
-        NX.icon(KIND_ICON[k], 16) + "<span>" + esc(NX.t("tpl.k." + k)) + '</span><span class="tp-tab-n nx-num">' + counts[k] + "</span></button>";
+        NX.icon(KIND_ICON[k], 16) + '<span class="tp-tab-l">' + esc(NX.t("tpl.k." + k)) + '</span><span class="tp-tab-s">' + esc(NX.t("tpl.ks." + k)) + '</span><span class="tp-tab-n nx-num">' + counts[k] + "</span></button>";
     }).join("") + "</div>";
 
     var toolbar = '<div class="nx-toolbar tp-toolbar">' + NX.ui.searchBox(state.q, NX.t("tpl.searchPh")) +

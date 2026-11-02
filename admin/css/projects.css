@@ -168,6 +168,7 @@ html[lang="ar"] .pj-phase-head { letter-spacing: 0; text-transform: none; font-s
 .tp-tab:hover { color: var(--ink); }
 .tp-tab.is-active { color: var(--ink); border-bottom-color: var(--gold); }
 .tp-tab.is-active .nx-ic { color: var(--gold-deep); }
+.tp-tab-s { display: none; }
 .tp-tab-n { font-size: 11px; background: var(--gray-soft); color: var(--muted); border-radius: 10px; padding: 0 7px; line-height: 18px; }
 .tp-tab.is-active .tp-tab-n { background: var(--charcoal); color: #fff; }
 .tp-toolbar { margin-bottom: 16px; }
@@ -296,6 +297,8 @@ html[lang="ar"] .tp-cl-ph-h { text-transform: none; letter-spacing: 0; font-size
   .tp-langseg { margin-inline-start: 0; }
   .tp-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; border-bottom: 0; overflow: visible; }
   .tp-tab { height: 40px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); margin: 0; font-size: 12.5px; gap: 6px; min-width: 0; }
+  .tp-tab-l { display: none; }
+  .tp-tab-s { display: block; }
   .tp-tab > span:not(.tp-tab-n) { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; text-align: start; }
   .tp-tab.is-active { background: var(--charcoal); border-color: var(--charcoal); color: #fff; }
   .tp-tab.is-active .nx-ic { color: var(--gold); }
