@@ -157,6 +157,8 @@
   function sum(list, fn) { return list.reduce(function (s, x) { return s + (Number(fn(x)) || 0); }, 0); }
   function pct(a, b) { return b ? Math.round(100 * a / b) : 0; }
   function moneyShort(v) { return Math.abs(v) >= 1e6 ? NX.fmt.compact(v) + " " + T("c.sar") : NX.fmt.money(v); }
+  /* KPI money: number + smaller currency so it fits phone tiles */
+  function moneyKpi(v) { var n = Math.abs(v) >= 1e6 ? NX.fmt.compact(v) : NX.fmt.money(v, { bare: true }); return esc(n) + ' <small class="an-cur">' + esc(T("c.sar")) + "</small>"; }
   function loc() { return NX.i18n.isAr ? "ar-SA-u-nu-latn-ca-gregory" : "en-GB"; }
   function propTotal(p) { try { return NX.calc.proposal(p).total; } catch (e) { return 0; } }
   function tipAttr(value, label) { return ' data-tip="' + esc(value) + '" data-tip-label="' + esc(label) + '" tabindex="0"'; }
@@ -321,12 +323,12 @@
     var kpis = [
       NX.ui.kpi({ label: T("an.kLeads"), value: String(d.leads.length), sub: esc(T("an.kLeadsSub", { n: d.open })), icon: "leads" }),
       NX.ui.kpi({ label: T("an.kWinRate"), value: d.winRate == null ? "—" : d.winRate + "%", sub: esc(T("an.kWinRateSub", { w: d.won.length, l: d.lost.length })), icon: "star" }),
-      NX.ui.kpi({ label: T("an.kWonValue"), value: esc(moneyShort(d.wonValue)), sub: esc(T("an.kWonValueSub", { n: d.won.length })), icon: "money", tone: "dark" }),
-      NX.ui.kpi({ label: T("an.kAvgDeal"), value: d.won.length ? esc(moneyShort(d.avgDeal)) : "—", sub: esc(T("an.kAvgDealSub", { n: d.won.length })), icon: "money" }),
+      NX.ui.kpi({ label: T("an.kWonValue"), value: moneyKpi((d.wonValue)), sub: esc(T("an.kWonValueSub", { n: d.won.length })), icon: "money", tone: "dark" }),
+      NX.ui.kpi({ label: T("an.kAvgDeal"), value: d.won.length ? moneyKpi(d.avgDeal) : "—", sub: esc(T("an.kAvgDealSub", { n: d.won.length })), icon: "money" }),
       NX.ui.kpi({ label: T("an.kProps"), value: String(d.props.length), sub: esc(T("an.kPropsSub", { a: d.accepted, o: d.pending })), icon: "proposals" }),
       NX.ui.kpi({ label: T("an.kAccept"), value: d.props.length ? d.acceptRate + "%" : "—", sub: esc(T("an.kAcceptSub")), icon: "check" }),
       NX.ui.kpi({ label: T("an.kDays"), value: d.avgDays == null ? "—" : esc(T("an.days", { n: d.avgDays })), sub: esc(T("an.kDaysSub")), icon: "calendar" }),
-      NX.ui.kpi({ label: T("an.kCollected"), value: esc(moneyShort(d.collected)), icon: "projects",
+      NX.ui.kpi({ label: T("an.kCollected"), value: moneyKpi((d.collected)), icon: "projects",
         sub: '<span class="an-meter" role="img" aria-label="' + pct(d.collected, d.projValue) + '%"><span style="width:' + pct(d.collected, d.projValue) + '%"></span></span>' + esc(T("an.kCollectedSub", { v: moneyShort(d.outstanding) })) })
     ];
 

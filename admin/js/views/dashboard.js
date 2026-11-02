@@ -119,6 +119,8 @@
   function after(iso, d) { var x = NX.fmt.toDate(iso); return !!x && x >= d; }
   function propTotal(p) { try { return NX.calc.proposal(p).total; } catch (e) { return 0; } }
   function moneyShort(v) { return Math.abs(v) >= 1e6 ? NX.fmt.compact(v) + " " + T("c.sar") : NX.fmt.money(v); }
+  /* KPI money: number + smaller currency so it fits phone tiles */
+  function moneyKpi(v) { var n = Math.abs(v) >= 1e6 ? NX.fmt.compact(v) : NX.fmt.money(v, { bare: true }); return esc(n) + ' <small class="db-cur">' + esc(T("c.sar")) + "</small>"; }
   function daysSince(iso) { var x = NX.fmt.toDate(iso); return x ? Math.floor((Date.now() - x.getTime()) / DAY) : 0; }
   function firstName(s) { var n = String((s && (s.name || s.email)) || "").trim(); return n.split(/[\s@]+/)[0] || ""; }
   function iconLink(href, icon, title, external) {
@@ -153,14 +155,14 @@
     var waitingNew = leads.filter(function (l) { return l.stage === "new"; });
     var kpis = [
       NX.ui.kpi({ label: T("dash.kNewLeads"), value: String(newThisMonth.length), sub: esc(T("dash.kNewLeadsSub", { n: waitingNew.length })), icon: "leads", href: "#/leads" }),
-      NX.ui.kpi({ label: T("dash.kPipeline"), value: esc(moneyShort(pipelineValue)), sub: esc(T("dash.kPipelineSub", { n: openLeads.length })), icon: "money", href: "#/leads" }),
+      NX.ui.kpi({ label: T("dash.kPipeline"), value: moneyKpi((pipelineValue)), sub: esc(T("dash.kPipelineSub", { n: openLeads.length })), icon: "money", href: "#/leads" }),
       NX.ui.kpi({ label: T("dash.kAwaiting"), value: String(sent.length), sub: esc(T("dash.kAwaitingSub", { v: moneyShort(sentValue) })), icon: "proposals", href: "#/proposals" }),
       NX.ui.kpi({ label: T("dash.kProjects"), value: String(activeProjects.length), sub: esc(lateProjects.length ? T("dash.kProjectsSub", { n: lateProjects.length }) : T("dash.kProjectsOk")), icon: "projects", href: "#/projects" })
     ];
     if (admin) {
       var wonMonth = leads.filter(function (l) { return won.indexOf(l.stage) > -1 && after(l.updatedAt, mStart); });
       var wonValue = wonMonth.reduce(function (s, l) { return s + (Number(l.value) || 0); }, 0);
-      kpis.push(NX.ui.kpi({ label: T("dash.kWon"), value: esc(moneyShort(wonValue)), sub: esc(T("dash.kWonSub", { n: wonMonth.length })), icon: "star", href: "#/analysis", tone: "dark" }));
+      kpis.push(NX.ui.kpi({ label: T("dash.kWon"), value: moneyKpi((wonValue)), sub: esc(T("dash.kWonSub", { n: wonMonth.length })), icon: "star", href: "#/analysis", tone: "dark" }));
     }
 
     el.innerHTML =

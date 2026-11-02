@@ -348,7 +348,7 @@
     var ch = t.channel || "any";
     return cardHead(t, NX.ui.badge(NX.t("tpl.ch." + ch), CH_TONE[ch] || "gray") + langTag(t.lang)) +
       (t.subject && ch !== "whatsapp" ? '<p class="tp-subj" dir="auto">' + NX.icon("mail", 13) + "<span>" + highlight(t.subject) + "</span></p>" : "") +
-      '<p class="tp-body" dir="auto">' + highlight(t.body || "") + "</p>" +
+      '<p class="tp-body" dir="auto"><span>' + highlight(t.body || "") + "</span></p>" +
       '<div class="tp-card-actions">' +
       '<button type="button" class="nx-btn nx-btn-primary nx-btn-sm tp-act" data-act="copy" data-id="' + esc(t.id) + '">' + NX.icon("copy", 15) + "<span>" + esc(NX.t("tpl.copyText")) + "</span></button>" +
       sbtn(NX.t("c.edit"), "edit", "edit", t.id) + sbtn("", "copy", "dup", t.id, "tp-icon", NX.t("tpl.duplicate")) + delBtn(t) + "</div>";
