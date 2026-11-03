@@ -116,7 +116,7 @@
   var note = document.getElementById("formNote");
   var EMAIL = "Info@ex-nexa.com";
   // Google Apps Script web app — saves each message to the NEXA spreadsheet and emails a copy.
-  var ENDPOINT = "https://script.google.com/macros/s/AKfycbwdSPe9MSTrzuODk00t07G2SJenZk7iPUJmDZq-YldvjY1-gtPXZG9G_ttQuClgPw6e/exec";
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbyMNeRrx026cIjVHtBzjvfA8ZZGplCjr8h5LMysmXtD67j4oEM5pctA901NW8foB7cQEQ/exec";
 
   var MSG = {
     invalid: { en: "Please fill in the required fields correctly.", ar: "يرجى تعبئة الحقول المطلوبة بشكل صحيح." },
